@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3531365808793223"
+     crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাডমিন ড্যাশবোর্ড | কেশবপুর প্রতিদিন</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        // নিরাপত্তা চেক: লগইন না থাকলে প্রবেশ নিষেধ
+        if (localStorage.getItem('isAdminLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="logo-area">
+                <img src="images (11).png" alt="Logo">
+                <h3>অ্যাডমিন প্যানেল</h3>
+            </div>
+            <nav>
+                <a href="#" class="active">📊 ড্যাশবোর্ড</a>
+                <a href="#manage-section">📰 নিউজ লিস্ট</a>
+                <button id="logoutBtn" class="btn-logout">🚪 লগআউট</button>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header class="glass">
+                <h2>স্বাগতম, অ্যাডমিন</h2>
+            </header>
+
+            <section class="form-section glass">
+                <h3>✍️ নতুন খবর যোগ / এডিট করুন</h3>
+                <form id="adminPostForm">
+                    <input type="text" id="postTitle" placeholder="নিউজের শিরোনাম" required>
+                    <div class="row">
+                        <select id="postCategory">
+                            <option>কেশবপুর</option>
+                            <option>বাংলাদেশ</option>
+                            <option>খেলাধুলা</option>
+                            <option>বিনোদন</option>
+                        </select>
+                        <input type="file" id="postImage" class="file-input">
+                    </div>
+                    <textarea id="postDetails" rows="6" placeholder="বিস্তারিত খবর লিখুন..."></textarea>
+                    <button type="submit" class="btn-submit">পাবলিশ করুন</button>
+                </form>
+            </section>
+
+            <section id="manage-section" class="table-section glass">
+                <h3>📋 প্রকাশিত খবরের তালিকা</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>তারিখ</th>
+                            <th>শিরোনাম</th>
+                            <th>অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newsTableBody">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কেশবপুর প্রতিদিন</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="blocker-notice" class="glass" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:9999; border:2px solid red; padding:15px; text-align:center;">
+        ⚠️ আপনার অ্যাড-ব্লকারটি বন্ধ করুন নতুবা ডাউনলোড লিঙ্ক পাবেন না।
+    </div>
+
+    <div class="bg-visuals">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <nav class="navbar glass">
+    <div class="brand-wrapper">
+        <a href="/" class="brand-content">
+            <div class="logo-circle-container">
+                <div class="kp-pulse-circle">
+                    <img src="images (11).png" alt="KP Logo" class="inner-logo">
+                </div>
+            </div>
+            <div class="header-text-brand">
+        <span class="brand-name">কেশবপুর প্রতিদিন</span><br>
+        <span class="brand-tagline">সত্যের পথে অবিচল</span>
+    </div>
+            <!-- <div class="logo-text">কেশবপুর<span>প্রতিদিন</span></div> -->
+        </a>
+    </div>
+
+    <ul class="nav-links">
+    <li><a href="#">সর্বশেষ</a></li>
+    <li><a href="#">বাংলাদেশ</a></li>
+    <li><a href="#">নির্বাচন</a></li>
+    <li><a href="#">বিশ্ব</a></li>
+    <li><a href="#">বাণিজ্য</a></li>
+    <li><a href="#">মতামত</a></li>
+    <li><a href="#">খেলা</a></li>
+    <li><a href="#">বিনোদন</a></li>
+    <li><a href="#">চাকরি</a></li>
+    <li><a href="#">জীবনযাপন</a></li>
+    <li><a href="#">ভিডিও</a></li>
+</ul>
+
+    <div class="nav-right">
+        <button id="openAuth" class="neon-btn-login">
+            <i class="fas fa-sign-in-alt"></i> প্রবেশ করুন
+        </button>
+        
+        <div id="userMenu" style="display:none; align-items:center; gap: 15px;">
+            <span id="welcomeUser" style="color: #fff; font-weight: bold; text-shadow: 0 0 5px #fff;"></span>
+            <button onclick="logoutUser()" class="neon-btn-logout">
+                <i class="fas fa-power-off"></i> লগআউট
+            </button>
+        </div>
+    </div>
+</nav>
+<br><br>
+    <div class="ticker-section">
+        <div class="ticker-container glass">
+            <div class="ticker-label neon-pulse">ব্রেকিং নিউজ</div>
+            <div class="ticker-wrap">
+                <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                    ২০২৬ সালের স্মার্ট সিটি প্রকল্পে যুক্ত হচ্ছে নতুন প্রযুক্তি... শেয়ার বাজারে রেকর্ড উত্থান... ফ্রিল্যান্সিংয়ে শীর্ষে বাংলাদেশ... নতুন জ্বালানি নীতি ঘোষণা...
+                </marquee>
+            </div>
+            <div class="clock-container">
+    <div class="cyber-clock-box">
+    <div class="time-display">
+        <span id="hours">00</span><span class="separator">:</span>
+        <span id="minutes">00</span><span class="separator">:</span>
+        <span id="seconds">00</span>
+    </div>
+    <div class="date-display" id="fullDate"></div>
+</div>
+</div>
+        </div>
+    </div>
+
+    <main class="container">
+        <aside class="left-sidebar">
+        <div class="quran-sidebar-widget">
+    <div class="quran-header">
+        <div class="neon-pulse-btn-quran">আল-কুরআন (ডিজিটাল)</div>
+    </div>
+    <div class="quran-body">
+        <select id="surahSelect" onchange="fetchSurahData()">
+            <option value="">সূরা নির্বাচন করুন...</option>
+            </select>
+
+        <div id="loadingText" style="display:none; color:#4db8ff; text-align:center; margin:10px;">লোডিং...</div>
+
+        <div id="surahDisplay" class="surah-display">
+            <div id="versesContainer">
+                <p style="text-align:center; color:#888;">একটি সূরা নির্বাচন করলে এখানে আরবি ও বাংলা অর্থ প্রদর্শিত হবে।</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="archive-calendar-card">
+    <div class="calendar-header-main">
+        <h3 class="calendar-title" style="flex-direction: column; align-items: center; gap: 10px;">
+            <div class="kp-pulse-circle">
+                <img src="images (11).png" alt="KP Logo" class="inner-logo">
+            </div>
+            <span class="title-text">পুরনো সংখ্যা</span>
+        </h3>
+        <a href="#" class="view-all-btn">আরও দেখুন <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="calendar-body">
+        <div class="month-selector">
+            <button id="prevMonth" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+            <h4 id="monthDisplay">February 2026</h4>
+            <button id="nextMonth" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <table class="modern-calendar">
+            <thead>
+                <tr>
+                    <th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th>
+                </tr>
+            </thead>
+            <tbody id="calendarDays"></tbody>
+        </table>
+    </div>
+</div>
+        </aside>
+
+        <main class="main-content">
+        <div class="widget glass news-slider-container">
+    <h3 class="w-title" style="text-align: center;">
+        <i class="fas fa-newspaper"></i> আজকের তাজা খবর
+    </h3>
+    
+<div class="news-box" style="display: flex; justify-content: center; align-items: center; min-height: 60px;">
+    <p id="news-content" style="transition: opacity 0.5s ease-in-out; margin: 0;"></p>
+</div>
+</div><br>
+
+<div id="adminNewsList"></div>
+
+
+<div class="trending-section">
+</div>
+            <div class="hero-card glass">
+                <h3 class="trending-title" style="text-align: center; display: block; width: 100%;">
+    <i class="fas fa-chart-line"></i> ট্রেন্ডিং সংবাদ
+</h3>
+                <div class="ad-container glass" style="margin: 20px 0;">
+</div>
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200" alt="Tech">
+                <div class="hero-info">
+                    <h2>ভবিষ্যৎ প্রযুক্তির নতুন দিগন্ত: ২০২৬ সালের বিশেষ প্রতিবেদন</h2>
+                    <p>কৃত্রিম বুদ্ধিমত্তা এবং রোবটিক্সের সমন্বয়ে বিশ্বজুড়ে নতুন বিপ্লব শুরু হয়েছে। প্রযুক্তির উৎকর্ষতায় বদলে যাচ্ছে সাধারণ মানুষের জীবনযাত্রা।</p>
+                    <button class="btn-glow">বিস্তারিত পড়ুন</button>
+                </div>
+            </div>
+            <section class="more-content">
+    <div class="section-divider">
+        <h3 class="s-title"><i class="fas fa-play-circle"></i> ভিডিও গ্যালারি</h3>
+        <div class="video-grid">
+            <div class="video-card glass">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="Video">
+                    <i class="fas fa-play"></i>
+                </div>
+                <p>২০২৬ সালের সেরা ৫টি গেমিং ল্যাপটপ</p>
+            </div>
+            <div class="video-card glass">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400" alt="Video">
+                    <i class="fas fa-play"></i>
+                </div>
+                <p>সেমিকন্ডাক্টর শিল্পে বাংলাদেশের বিপ্লব</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="popular-news-section">
+    <h3 class="w-title" style="text-align: center;">
+        <i class="fas fa-bolt"></i> জনপ্রিয় ও বাস্তবধর্মী সংবাদ
+    </h3>
+    
+    <div class="featured-video-card">
+        <div class="video-thumb featured-thumb">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_MAIN" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="news-info">
+            <div class="news-meta-top">
+                <span><i class="far fa-calendar-alt"></i> ২৭ ফেব্রুয়ারি, ২০২৬</span>
+                <span><i class="far fa-clock"></i> ১০ মি. বিশেষ রিপোর্ট</span>
+            </div>
+            <h4 class="featured-title">আজকের বিশেষ ভিডিও রিপোর্ট: স্থানীয় উন্নয়নের পূর্ণাঙ্গ চিত্র ও ভবিষ্যৎ পরিকল্পনা</h4>
+            <p>কেশবপুরের সামগ্রিক উন্নয়ন প্রকল্পের বর্তমান অবস্থা এবং আগামী বছরের উন্নয়ন রূপরেখা নিয়ে আমাদের বিশেষ ভিডিও বুলেটিন।</p>
+            <a href="#" class="read-more">পূর্ণাঙ্গ ভিডিও দেখুন</a>
+        </div>
+    </div>
+
+    <div class="video-grid-4">
+        <div class="content-card">
+            <div class="news-thumb small-thumb">
+                <img src="news-image-1.jpg" alt="News Image">
+                <span class="category-tag">বাস্তব</span>
+            </div>
+            <div class="news-info small-info">
+                <div class="news-meta-top"><span>২৭ ফেব্রু</span></div>
+                <h4>যশোরের কৃষিখাতে প্রযুক্তির বিপ্লব</h4>
+                <a href="#" class="read-more">বিস্তারিত</a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="news-thumb small-thumb">
+                <img src="news-image-2.jpg" alt="News Image">
+                <span class="category-tag">উন্নয়ন</span>
+            </div>
+            <div class="news-info small-info">
+                <div class="news-meta-top"><span>২৭ ফেব্রু</span></div>
+                <h4>নদী রক্ষায় নতুন উদ্যোগ</h4>
+                <a href="#" class="read-more">বিস্তারিত</a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="news-thumb small-thumb">
+                <img src="news-image-3.jpg" alt="News Image">
+                <span class="category-tag">শিক্ষা</span>
+            </div>
+            <div class="news-info small-info">
+                <div class="news-meta-top"><span>২৬ ফেব্রু</span></div>
+                <h4>তৃণমূল শিক্ষার্থীদের সাফল্য</h4>
+                <a href="#" class="read-more">বিস্তারিত</a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="news-thumb small-thumb">
+                <img src="news-image-4.jpg" alt="News Image">
+                <span class="category-tag">চিকিৎসা</span>
+            </div>
+            <div class="news-info small-info">
+                <div class="news-meta-top"><span>২৬ ফেব্রু</span></div>
+                <h4>চিকিৎসা ক্ষেত্রে সাফল্য</h4>
+                <a href="#" class="read-more">বিস্তারিত</a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+        </main>
+
+        <aside class="right-sidebar">
+        <div class="widget glass">
+                <h3 class="w-title"><i class="fas fa-bolt"></i> দ্রুত আপডেট</h3>
+                <div class="update-box">
+                    <div class="update-item">
+                        <span class="u-time">১০ মিনিট আগে</span>
+                        <p>৫জি নেটওয়ার্কের নতুন মাইলফলক স্পর্শ করলো বাংলাদেশ।</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="u-time">২৫ মিনিট আগে</span>
+                        <p>ডিজিটাল কারেন্সিতে বড় পরিবর্তনের আভাস দিচ্ছে কেন্দ্রীয় ব্যাংক।</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="u-time">৪৫ মিনিট আগে</span>
+                        <p>স্মার্ট কার্ডে যুক্ত হচ্ছে নতুন ই-পাসপোর্ট সুবিধা।</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="u-time">১ ঘণ্টা আগে</span>
+                        <p>ফ্রিল্যান্সিং খাতে সরকারি বিশেষ অনুদান প্রকল্প উদ্বোধন।</p>
+                    </div>
+                    <div class="update-item">
+                        <span class="u-time">২ ঘণ্টা আগে</span>
+                        <p>মেট্রোরেলের নতুন রুট চালু হচ্ছে আগামী মাসের ১ তারিখ।</p>
+                    </div>
+                </div>
+                <button class="btn-gradient-small">সব আপডেট দেখুন <i class="fas fa-arrow-right"></i></button>
+            </div><br>
+    <div class="mini-calc">
+        <div class="m-display">
+            <div id="m-prev"></div>
+            <div id="m-curr">0</div>
+        </div>
+        <div class="m-btns">
+            <button class="m-btn m-orange" onclick="clearM()">AC</button>
+            <button class="m-btn m-dark" onclick="delM()">DEL</button>
+            <button class="m-btn m-dark" onclick="opM('/')">÷</button>
+            <button class="m-btn m-dark" onclick="opM('*')">×</button>
+            
+            <button class="m-btn" onclick="addM('7')">7</button>
+            <button class="m-btn" onclick="addM('8')">8</button>
+            <button class="m-btn" onclick="addM('9')">9</button>
+            <button class="m-btn m-dark" onclick="opM('-')">−</button>
+            
+            <button class="m-btn" onclick="addM('4')">4</button>
+            <button class="m-btn" onclick="addM('5')">5</button>
+            <button class="m-btn" onclick="addM('6')">6</button>
+            <button class="m-btn m-cyan m-tall" onclick="opM('+')">+</button>
+            
+            <button class="m-btn" onclick="addM('1')">1</button>
+            <button class="m-btn" onclick="addM('2')">2</button>
+            <button class="m-btn" onclick="addM('3')">3</button>
+            
+            <button class="m-btn" onclick="addM('0')">0</button>
+            <button class="m-btn" onclick="addM('.')">.</button>
+            <button class="m-btn m-purple m-wide" onclick="compM()">=</button>
+        </div>
+    </div>
+</div>
+
+<div class="widget glass weather-widget">
+    <h3 class="w-title"><i class="fas fa-cloud-sun"></i> আজকের আবহাওয়া</h3>
+    <div class="weather-content">
+        <div class="weather-main">
+            <i class="fas fa-sun weather-icon"></i>
+            <span class="temp">৩২°C</span>
+        </div>
+        <p class="loc">ঢাকা, বাংলাদেশ</p>
+        <div class="weather-details">
+            <span><i class="fas fa-tint"></i> ৪৫% আর্দ্রতা</span>
+            <span><i class="fas fa-wind"></i> ১২ কিমি/ঘণ্টা</span>
+        </div>
+    </div>
+    </div>
+    </aside>
+        
+    </main>
+
+<footer class="footer-glass h-footer">
+    <div class="h-footer-container">
+        <div class="h-footer-col">
+            <div class="footer-logo-container">
+    <div class="kp-pulse-circle">
+                    <img src="images (11).png" alt="KP Logo" class="inner-logo">
+                </div>
+    <div class="footer-text-brand">
+        <span class="brand-name">কেশবপুর প্রতিদিন</span>
+        <span class="brand-tagline">সত্যের পথে অবিচল</span>
+    </div>
+</div>
+
+            <p class="h-desc">নির্ভীক সাংবাদিকতা এবং সঠিক তথ্য নিয়ে আমরা পাশে আছি প্রতিটি মুহূর্তে।</p>
+            <h3>Keshabpur Pratidin</h3>
+        <p>Keshabpur, Jashore, Bangladesh.</p>
+        <p class="address">
+            Email : shemuljcf@gmail.com <br>
+            Phone No. : 01729141489, 01305434329.
+        </p>
+        </div>
+
+        <div class="h-footer-col links-sec">
+    <h4 class="col-title">লিঙ্কসমূহ</h4>
+    <div class="neon-link-wrapper">
+        <a href="#" class="neon-span-btn">আমাদের সম্পর্কে</a>
+        <a href="#" class="neon-span-btn">বিজ্ঞাপন</a>
+        <a href="#" class="neon-span-btn">গোপনীয়তা নীতি</a>
+        <a href="#" class="neon-span-btn">যোগাযোগ</a>
+        
+        <a href="#" class="neon-span-btn">আর্কাইভ</a>
+        <a href="#" class="neon-span-btn">লেখক তালিকা</a>
+        <a href="#" class="neon-span-btn pink">সংবাদ পাঠান</a> <a href="#" class="neon-span-btn">ব্যবহারের শর্তাবলী</a>
+    </div>
+</div>
+
+        <div class="newsletter-box">
+            <h4 class="col-title">নিউজলেটার</h4>
+            <div class="neon-input-wrapper">
+            <input type="email" placeholder="ইমেইল দিন" class="neon-input">
+            <button type="submit" class="neon-join-btn">Join</button>
+            </div>
+            <div class="footer-social-links">
+    <a href="#" class="social-icon fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="social-icon yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+    <a href="#" class="social-icon ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="social-icon tw" title="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="social-icon wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+</div>
+    <div class="footer-extra-options">
+    <div class="neon-extra-card">
+        <p class="extra-title">আমাদের অ্যাপ ডাউনলোড করুন</p>
+        <div class="app-buttons-neon">
+            <a href="#" class="app-btn store-play">
+                <i class="fab fa-google-play"></i>
+                <span><small>Get it on</small><br>Google Play</span>
+            </a>
+            <a href="#" class="app-btn store-apple">
+                <i class="fab fa-apple"></i>
+                <span><small>Download on the</small><br>App Store</span>
+            </a>
+        </div>
+
+        <div class="footer-contact-mini">
+            <div class="contact-inline">
+                <span><i class="fas fa-phone-alt"></i> বিজ্ঞাপন: ০১৭২৯-১৪১৪৮৯</span>
+                <span class="divider">|</span>
+                <span><i class="fas fa-envelope"></i> shemuljcf@gmail.com</span>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    <div class="h-footer-bottom">
+    <div class="footer-bottom-container">
+        <div class="footer-empty-space"></div>
+
+        <p class="copyright-text">© ২০২৬ কেশবপুর প্রতিদিন | সর্বস্বত্ব সংরক্ষিত</p>
+
+        <div class="footer-payment-icons">
+            <img src="download.png" alt="Payment Gateways">
+        </div>
+    </div>
+</div>
+</footer>
+
+
+    <div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="close-auth" id="closeModal">&times;</span>
+        
+        <div class="auth-box" id="authBox">
+            <div class="form-container sign-up-container">
+                <form id="regForm">
+                    <div class="form-brand-header">
+                        <div class="kp-pulse-circle">
+                            <img src="images (11).png" alt="KP Logo" class="inner-logo">
+                        </div>
+                        <div class="logo-text-modal">কেশবপুর<span>প্রতিদিন</span></div>
+                    </div>
+                    <h1>Create Account</h1> 
+                    <input type="text" placeholder="Name" required />
+                    <input type="email" placeholder="Email" required />
+                    <input type="password" placeholder="Password" required />
+                    <button type="submit" class="btn-action">Sign Up</button>
+                </form>
+            </div>
+
+            <div class="form-container sign-in-container">
+                <form id="loginForm">
+                    <div class="form-brand-header">
+                        <div class="kp-pulse-circle">
+                            <img src="images (11).png" alt="KP Logo" class="inner-logo">
+                        </div>
+                        <div class="logo-text-modal">কেশবপুর<span>প্রতিদিন</span></div>
+                    </div>
+                    <h1 style="color: #fff; margin-bottom: 10px;">Login</h1>
+                    <input type="email" placeholder="Email" required />
+                    <input type="password" placeholder="Password" required />
+                    <a href="#" style="margin-bottom: 10px;">পাসওয়ার্ড ভুলে গেছেন?</a>
+                    <button type="submit" class="btn-action">প্রবেশ করুন</button> 
+                </form>
+            </div>
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>স্বাগতম!</h1>
+                        <p>আপনার তথ্য দিয়ে আমাদের সাথে যুক্ত হোন</p>
+                        <button class="btn-outline" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>হ্যালো বন্ধু!</h1>
+                        <p>আজই আপনার যাত্রা শুরু করুন</p>
+                        <button class="btn-outline" id="signUp">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="adModal" class="modal">
+        <div class="modal-content glass neon-border-green">
+            <h3>🎁 লিঙ্ক প্রস্তুত হচ্ছে...</h3>
+            
+            <div class="ad-slot glass" style="min-height: 250px; margin: 15px 0; display: flex; align-items: center; justify-content: center;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3531365808793223"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="timerBox">
+                <p><span id="sec">15</span> সেকেন্ড অপেক্ষা করুন</p>
+                <div class="progress-bar"><div id="bar"></div></div>
+            </div>
+            <a id="dlLink" href="#" target="_blank" class="neon-btn green" style="display:none;">📥 এখনই ডাউনলোড করুন</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
