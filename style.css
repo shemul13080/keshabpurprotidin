@@ -1831,6 +1831,7 @@ h3{
     max-width: 150px;
     height: auto;
     filter: brightness(1.1) drop-shadow(0 0 5px rgba(255,255,255,0.1));
+    cursor: pointer;
 }
 
 /* ৬. অ্যানিমেশন ও রেসপন্সিভ */
