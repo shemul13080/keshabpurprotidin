@@ -1,88 +1,53 @@
-// পেজ লোড হলে নিউজ লিস্ট দেখাবে
-document.addEventListener('DOMContentLoaded', displayNewsTable);
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const adminPostForm = document.getElementById('adminPostForm');
+// ফায়ারবেস কনসোল থেকে পাওয়া আপনার নিজস্ব তথ্য এখানে বসান
+const firebaseConfig = {
+  apiKey: "AIzaSyBiKOWchCMZhELByLsw6jieJqMCKy442zE",
+  authDomain: "keshabpur-news.firebaseapp.com",
+  databaseURL: "https://keshabpur-news-default-rtdb.firebaseio.com", // এটি আমি যোগ করে দিলাম
+  projectId: "keshabpur-news",
+  storageBucket: "keshabpur-news.firebasestorage.app",
+  messagingSenderId: "1073107142671",
+  appId: "1:1073107142671:web:03054deafec95924607b7a"
+};
 
-// ১. নিউজ সেভ করার লজিক
-adminPostForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+// ফায়ারবেস ইনিশিয়ালাইজ করা
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-    const title = document.getElementById('postTitle').value;
-    const category = document.getElementById('postCategory').value;
-    const details = document.getElementById('postDetails').value;
-    const imageFile = document.getElementById('postImage').files[0];
+// ফর্ম সাবমিট হ্যান্ডলার
+const newsForm = document.getElementById('newsEntryForm');
 
-    // ইমেজকে Base64 এ রূপান্তর করা (লোকাল স্টোরেজে সেভ করার জন্য)
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            saveToStorage(title, category, details, event.target.result);
+if (newsForm) {
+    newsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // ফর্ম থেকে ডেটা সংগ্রহ
+        const title = document.getElementById('newsTitle').value;
+        const category = document.getElementById('newsCategory').value;
+        const image = document.getElementById('newsImage').value || "https://via.placeholder.com/800x450";
+        const details = document.getElementById('newsDetails').value;
+        const publishDate = new Date().toLocaleString('bn-BD');
+
+        // ডেটাবেসে পাঠানোর অবজেক্ট
+        const newsPost = {
+            title: title,
+            category: category,
+            image: image,
+            details: details,
+            date: publishDate,
+            timestamp: Date.now()
         };
-        reader.readAsDataURL(imageFile);
-    } else {
-        saveToStorage(title, category, details, 'https://via.placeholder.com/100');
-    }
-});
 
-function saveToStorage(title, category, details, image) {
-    let newsList = JSON.parse(localStorage.getItem('myNews')) || [];
-
-    const newPost = {
-        id: Date.now(),
-        date: new Date().toLocaleDateString('bn-BD'),
-        title: title,
-        category: category,
-        description: details,
-        image: image
-    };
-
-    newsList.push(newPost);
-    localStorage.setItem('myNews', JSON.stringify(newsList));
-
-    adminPostForm.reset(); // ফর্ম ক্লিয়ার করা
-    alert("নিউজ সফলভাবে পাবলিশ হয়েছে!");
-    displayNewsTable(); // টেবিল আপডেট করা
-}
-
-// ২. টেবিল লিস্ট দেখানোর লজিক
-function displayNewsTable() {
-    const tableBody = document.getElementById('newsTableBody');
-    if (!tableBody) return;
-
-    const newsData = JSON.parse(localStorage.getItem('myNews')) || [];
-    tableBody.innerHTML = "";
-
-    if (newsData.length === 0) {
-        tableBody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>কোনো নিউজ নেই</td></tr>";
-        return;
-    }
-
-    // নতুন নিউজ সবার উপরে দেখাবে
-    newsData.reverse().forEach((news) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${news.date}</td>
-            <td>${news.title}</td>
-            <td>
-                <button onclick="deleteNews(${news.id})" style="background:red; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">মুছে ফেলুন</button>
-            </td>
-        `;
-        tableBody.appendChild(row);
+        // 'news' নামক টেবিল/রেফারেন্সে ডেটা পাঠানো
+        push(ref(db, 'news'), newsPost)
+            .then(() => {
+                alert("✅ অভিনন্দন! খবরটি সফলভাবে পাবলিশ হয়েছে।");
+                newsForm.reset(); // ফর্ম খালি করা
+            })
+            .catch((error) => {
+                alert("❌ সমস্যা হয়েছে: " + error.message);
+            });
     });
 }
-
-// ৩. নিউজ মুছে ফেলার লজিক
-function deleteNews(id) {
-    if (confirm("আপনি কি নিশ্চিতভাবে এই নিউজটি মুছে ফেলতে চান?")) {
-        let newsList = JSON.parse(localStorage.getItem('myNews')) || [];
-        newsList = newsList.filter(news => news.id !== id);
-        localStorage.setItem('myNews', JSON.stringify(newsList));
-        displayNewsTable();
-    }
-}
-
-// ৪. লগআউট লজিক
-document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('isAdminLoggedIn');
-    window.location.href = 'index.html';
-});
