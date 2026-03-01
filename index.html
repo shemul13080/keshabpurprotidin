@@ -174,15 +174,69 @@
 
         <main class="main-content">
         <main class="container">
-    <div style="display: flex; align-items: center; gap: 10px; margin: 30px 0 20px;">
-        <div style="width: 5px; height: 30px; background: #01ff95; box-shadow: 0 0 10px #01ff95;"></div>
-        <h2 style="color: #fff; margin: 0; font-size: 24px;">আজকের তাজা খবর</h2>
+    <div style="margin: 40px 0 30px; text-align: center;">
+        <div class="taza-khobor-btn">
+            <span class="live-dot"></span>
+            <h2 class="btn-text">আজকের তাজা খবর</h2>
+        </div>
     </div>
 
     <div id="news-container" class="news-grid-layout">
         <p style="text-align: center; color: #888; grid-column: 1/-1;">খবর লোড হচ্ছে...</p>
     </div>
 </main>
+
+<style>
+/* বাটন স্টাইল */
+.taza-khobor-btn {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 12px; 
+    background: linear-gradient(45deg, #01ff95, #00d47e); 
+    padding: 12px 35px; 
+    border-radius: 50px; 
+    box-shadow: 0 4px 15px rgba(1, 255, 149, 0.3);
+    cursor: pointer;
+    transition: all 0.4s ease; /* রঙ পরিবর্তনের গতি */
+    border: 2px solid transparent;
+}
+
+/* হোভার করলে যা ঘটবে */
+.taza-khobor-btn:hover {
+    background: #000; /* ব্যাকগ্রাউন্ড কালো হবে */
+    border-color: #01ff95; /* বর্ডার সবুজ হবে */
+    transform: translateY(-3px); /* সামান্য উপরে উঠবে */
+    box-shadow: 0 8px 25px rgba(1, 255, 149, 0.5);
+}
+
+.btn-text {
+    color: #000; 
+    margin: 0; 
+    font-size: 22px; 
+    font-weight: bold;
+    transition: all 0.4s ease;
+}
+
+/* হোভার করলে টেক্সট সাদা হবে */
+.taza-khobor-btn:hover .btn-text {
+    color: #01ff95;
+}
+
+/* লাইভ ডট অ্যানিমেশন */
+.live-dot {
+    width: 12px; 
+    height: 12px; 
+    background: #ff0000; /* লাল রঙের ডট */
+    border-radius: 50%; 
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    70% { transform: scale(1.2); opacity: 0.5; box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+</style>
 
 <div id="adminNewsList"></div>
 
@@ -597,4 +651,5 @@
 </body>
 
 </html>
+
 
