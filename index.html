@@ -565,26 +565,34 @@
   const db = getDatabase(app);
   const newsContainer = document.getElementById('news-container');
 
-  // ফায়ারবেস থেকে নিউজ পড়া শুরু
-  onValue(ref(db, 'news'), (snapshot) => {
-    const data = snapshot.val();
-    if (data && newsContainer) {
+  if (newsContainer) {
+    onValue(ref(db, 'news'), (snapshot) => {
+      const data = snapshot.val();
       newsContainer.innerHTML = ''; 
-      Object.keys(data).reverse().forEach(key => {
-        const news = data[key];
-        newsContainer.innerHTML += `
-          <div class="news-card">
-            <img src="${news.image}" onerror="this.src='https://via.placeholder.com/400x250'">
-            <div class="news-card-body">
-              <span class="category-tag">${news.category}</span>
-              <h3>${news.title}</h3>
-              <p>${news.details.substring(0, 100)}...</p>
-              <small>${news.date}</small>
-            </div>
-          </div>`;
-      });
-    }
-  });
+
+      if (data) {
+        Object.keys(data).reverse().forEach(key => {
+          const news = data[key];
+          const newsHtml = `
+            <div class="news-card">
+              <img src="${news.image}" alt="news" onerror="this.src='https://via.placeholder.com/400x250'">
+              <div class="news-card-body">
+                <span class="category-tag">${news.category}</span>
+                <h3 style="margin-top:10px; color:#fff;">${news.title}</h3>
+                <p style="color:#ccc; font-size:14px;">${news.details.substring(0, 100)}...</p>
+                <div style="margin-top:10px; font-size:12px; color:#01ff95;">
+                  <i class="fas fa-clock"></i> ${news.date || ''}
+                </div>
+              </div>
+            </div>`;
+          newsContainer.innerHTML += newsHtml;
+        });
+      } else {
+        newsContainer.innerHTML = '<p style="text-align:center; grid-column:1/-1;">এখনো কোনো সংবাদ নেই।</p>';
+      }
+    });
+  }
 </script>
 </body>
+
 </html>
