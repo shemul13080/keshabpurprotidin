@@ -19,19 +19,32 @@ const myNewsData = [
 // ==========================================
 function updateClock() {
     const now = new Date();
+    
+    // সময় বের করা
     const h = now.getHours().toString().padStart(2, '0');
     const m = now.getMinutes().toString().padStart(2, '0');
     const s = now.getSeconds().toString().padStart(2, '0');
     
-    if(document.getElementById('hours')) document.getElementById('hours').innerText = h;
-    if(document.getElementById('minutes')) document.getElementById('minutes').innerText = m;
-    if(document.getElementById('seconds')) document.getElementById('seconds').innerText = s;
+    // এইচটিএমএল এ বসানো (নিরাপদভাবে)
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const dateEl = document.getElementById('fullDate');
+
+    if(hoursEl) hoursEl.innerText = h;
+    if(minutesEl) minutesEl.innerText = m;
+    if(secondsEl) secondsEl.innerText = s;
     
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    if(document.getElementById('fullDate')) {
-        document.getElementById('fullDate').innerText = now.toLocaleDateString('bn-BD', options);
+    // তারিখ ফরম্যাট করা (বাংলায়)
+    if(dateEl) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.innerText = now.toLocaleDateString('bn-BD', options);
     }
 }
+
+// এই অংশটি যোগ না করলে ঘড়ি চলবে না
+setInterval(updateClock, 1000);
+window.onload = updateClock; // পেজ লোড হলে ঘড়ি চালু হবে
 
 // ==========================================
 // ৩. ক্যালকুলেটর লজিক

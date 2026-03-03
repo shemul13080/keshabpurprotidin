@@ -54,11 +54,28 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--dark); color:
 @keyframes shine { to { background-position: 200% center; } }
 
 /* Ticker Section */
-.ticker-section { padding: 0 5%; margin-bottom: 30px; }
-.ticker-container { display: flex; align-items: center; height: 55px; padding: 0 15px; }
+.ticker-section { padding: 0 5%; margin-bottom: 10px; }
+.ticker-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
 .ticker-label { margin-right: 0px; }
-.ticker-wrap { flex: 1; overflow: hidden; }
+.ticker-wrap {
+    flex-grow: 1; /* এটি টি্যাকারকে মাঝখানে জায়গা দেবে */
+    margin: 0 0px;
+}
 .ticker-time { margin-left: 15px; color: var(--accent); font-weight: bold; }
+.clock-container {
+    min-width: 50px; /* ঘড়ির জন্য নির্দিষ্ট জায়গা */
+    text-align: right;
+}
+/* মেনু লিঙ্কগুলোকে পজিশন দেওয়া যাতে আন্ডারলাইন ইফেক্ট ঠিক থাকে */
+.nav-links li {
+    position: relative;
+}
 
 /* দ্রুত আপডেট সেকশন (উন্নত) */
 .update-box { margin-top: 15px; }
@@ -375,6 +392,7 @@ form button:active {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-left: 250px;
 }
 
 /* ভিডিও গ্যালারি */
@@ -941,13 +959,13 @@ form button:active {
 } */
 
 /* নেভিগেশন লিঙ্কগুলোর ডিফল্ট কালার */
+/* এটি নিশ্চিত করুন */
 .nav-links a {
-    position: relative; /* এটি আন্ডারলাইনকে টেক্সটের সাথে আটকে রাখবে */
+    position: relative !important; /* এটি না দিলে ওই কোণার সমস্যা যাবে না */
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 5px;
     color: #fff;
     text-decoration: none;
-    z-index: 1;
 }
 
 /* মাউস নিলে (Hover) বা সিলেক্ট থাকলে (Active) কালার */
@@ -957,17 +975,16 @@ form button:active {
     text-shadow: 0 0 10px rgba(1, 255, 149, 0.5); /* হালকা নিওন গ্লো */
 }
 
-/* নিচের দিকে একটি আন্ডারলাইন এনিমেশন (অপশনাল কিন্তু সুন্দর দেখাবে) */
+/* আন্ডারলাইন ইফেক্টটি এভাবে রাখুন */
 .nav-links a::after {
     content: '';
-    position: absolute;
+    position: absolute; /* এটি এখন ওই 'a' ট্যাগ এর নিচেই থাকবে */
     bottom: 0;
     left: 0;
     width: 0;
     height: 2px;
     background: #01ff95;
     transition: width 0.3s ease;
-    box-shadow: 0 0 10px #01ff95;
 }
 .nav-links a:hover::after {
     width: 100%;
@@ -1615,35 +1632,33 @@ form input {
 
     /* ৩-কলাম লেআউট স্টাইল */
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
+    display: flex !important;
+    flex-direction: row; /* পাশাপাশি বসাবে */
+    justify-content: flex-start;
     align-items: flex-start;
+    gap: 20px;
+    width: 100%;
 }
 
 /* বাম সাইডবার - ডিজিটাল কুরআন */
 .left-sidebar {
-    flex: 1; /* ২৫% এর কাছাকাছি জায়গা নেবে */
-    min-width: 300px;
-    position: sticky;
-    top: 90px;
+    width: 300px !important; /* সাইডবারের ফিক্সড সাইজ */
+    flex-shrink: 0;
 }
 
 /* মাঝখানের মূল কন্টেন্ট - খবর */
 .main-content {
-    flex: 2; /* ৫০% জায়গা নেবে */
-    min-width: 400px;
+    flex-grow: 1; /* বাকি জায়গা নিউজ সেকশন নেবে */
 }
 
 /* ডান সাইডবার - আপডেট ও ক্যালকুলেটর */
 .right-sidebar {
     flex: 1; /* ২৫% জায়গা নেবে */
     min-width: 300px;
-    position: sticky;
+    /* position: sticky; */
     top: 90px;
+    /* background-color: #505670;
+    border-radius: 4px; */
 }
 
 /* রেসপন্সিভ: ট্যাব ও মোবাইলের জন্য */
@@ -3206,22 +3221,21 @@ h3{
 /* নিউজ গ্রিড ও কার্ড স্টাইল */
 .news-grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    padding: 20px 0;
+    margin-bottom: 40px;
 }
 
 .news-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(1, 255, 149, 0.2);
-    border-radius: 15px;
+    background: #526378;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: 0.3s;
 }
 
 .news-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(1, 255, 149, 0.2);
 }
 
 .news-card img {
@@ -3304,43 +3318,227 @@ h3{
     font-size: 13px !important;
     margin: 0 !important;
 }
-/* মেইন ফুটার কন্টেইনার */
-.main-footer {
-    background: #0a0b10; /* ফুটারের ব্যাকগ্রাউন্ড আরও ডার্ক করা হয়েছে */
-    padding: 60px 20px;
-    border-top: 1px solid rgba(1, 255, 149, 0.1);
-}
-/* লোগো এবং টেক্সটকে এক লাইনে রাখার জন্য */
-.brand-container {
-    display: flex !important;
-    align-items: center !important;
-    gap: 15px !important;
-    z-index: 10;
+.site-title1 {
+    color: #01ff95 !important;
+    font-size: 12px !important;
+    margin: 0 !important;
+    font-weight: bold;
 }
 
-.brand-text-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.site-tagline1 {
+    color: #ccc !important;
+    font-size: 8px !important;
+    margin: 0 !important;
 }
-/* টেক্সট গ্রুপকে ওপর-নিচে রাখার জন্য */
-.brand-text-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* তাজা খবর বাটন স্টাইল */
+.taza-khobor-btn {
+    /* background-color: #00ff99; */
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
 }
-/* আপনার স্ক্রিনশটে যে তারিখের বক্সটি ভেঙেছে তা ঠিক করতে */
-.date-social-box {
-    position: relative !important;
+.taza-btn-custom {
+    font-size: 22px !important; /* লেখা বড় করার জন্য */
+    padding: 12px 35px !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: none;
+    background-color: #321564;
+    color: red;
+}
+/* লাইভ ডট অ্যানিমেশন (লগইন স্টাইলের সাথে মানানসই) */
+.live-dot {
+    width: 12px; 
+    height: 12px; 
+    background: #ff0000; 
+    border-radius: 50%; 
+    box-shadow: 0 0 10px #ff0000;
+    animation: pulse-red 1.5s infinite;
+}
+.taza-khobor-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+}
+@keyframes pulse-red {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+/* লাইভ পালস অ্যানিমেশন */
+.pulse-icon {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+/* ফুটার লোগো কন্টেইনার */
+.footer-logo-section .logo-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background: rgba(0, 0, 0, 0.3);
+    flex-direction: column; /* লোগোর নিচে লেখা দেখানোর জন্য */
+    align-items: center;
+    gap: 10px;
+}
+
+/* লোগোর গোল বৃত্ত ও গ্লসি ইফেক্ট */
+.footer-logo-section .logo-circle {
+    width: 80px; /* ফুটারের জন্য সাইজ একটু ছোট রাখা হয়েছে */
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    padding: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); /* নিয়ন গ্লো */
+    border: 2px solid #00f2ff;
+}
+
+.footer-logo-section .main-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* হেডারের মত শাইন অ্যানিমেশন */
+.footer-logo-section .logo-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.6),
+        transparent
+    );
+    transform: skewX(-25deg);
+    animation: footer-shine 3s infinite;
+}
+
+@keyframes footer-shine {
+    100% { left: 200%; }
+}
+
+/* ফুটার লোগো টেক্সট স্টাইল */
+.footer-logo-section .logo-text {
+    font-size: 24px;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.footer-logo-section .logo-text span {
+    color: #00f2ff; /* প্রতিদিন অংশটি আকাশী কালার */
+}
+/* মেইন ভিডিও প্লেয়ার স্টাইল */
+.video-player-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+}
+
+.video-player-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-featured-video {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(1, 255, 149, 0.2);
+    margin-bottom: 30px;
+    transition: 0.3s;
+}
+
+.video-info-overlay {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.video-info-overlay h2 {
+    color: #01ff95;
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.badge-live {
+    background: #ff0000;
+    color: white;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* ছোট ৪টি ভিডিও গ্রিড */
+.sub-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.sub-video-card {
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
 }
-/* পেজের একদম টপ-লেফটে থাকা অনাকাঙ্ক্ষিত এলিমেন্ট লুকানোর চূড়ান্ত কমান্ড */
-body > .nav-links:first-of-type, 
-body > span:first-of-type {
-    display: none !important;
+
+.sub-video-card:hover {
+    transform: translateY(-5px);
+    border-color: #01ff95;
+}
+
+.sub-thumb {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.sub-thumb img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+}
+
+.play-btn-small {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(1, 255, 149, 0.8);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
 }
