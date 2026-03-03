@@ -265,6 +265,9 @@ const calendarDays = document.getElementById('calendarDays');
 let currentDate = new Date();
 
 function renderCalendar() {
+    // নিশ্চিত করুন calendarDays সঠিক টেবিল বডিকে ধরছে
+    if (!calendarDays) return; 
+    
     calendarDays.innerHTML = "";
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -274,7 +277,7 @@ function renderCalendar() {
     const firstDayOfMonth = new Date(year, month, 1).getDay(); 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     
-    // Sat=0 হিসেবে শুরু করার লজিক
+    // Sat=0 হিসেবে শুরু করার সংশোধিত লজিক
     let startDay = (firstDayOfMonth + 1) % 7; 
 
     let date = 1;
@@ -284,18 +287,18 @@ function renderCalendar() {
             let cell = document.createElement("td");
             
             if (i === 0 && j < startDay) {
-                cell.innerText = "";
+                cell.innerHTML = "&nbsp;"; // খালি না রেখে স্পেস দেওয়া ভালো
             } else if (date > daysInMonth) {
-                break;
+                // সেল যোগ না করে লুপ থেকে বের হওয়া যাবে না, নাহলে টেবিল ভেঙে যাবে
+                row.appendChild(cell); 
+                continue; 
             } else {
                 cell.innerText = date;
                 
-                // শনিবার (j=0) এবং শুক্রবার (j=6) এর জন্য weekend ক্লাস
                 if (j === 0 || j === 6) {
-                cell.classList.add("weekend");
+                    cell.classList.add("weekend");
                 }
                 
-                // আজকের তারিখ চেক
                 const today = new Date();
                 if (date === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
                     cell.classList.add("today");

@@ -5,132 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>কেশবপুর প্রতিদিন - স্মার্ট এডমিন</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         :root {
-            --sidebar-width: 260px;
-            --list-width: 320px;
             --accent-color: #01ff95;
+            --secondary-color: #00d4ff;
             --dark-bg: #0a0b10;
             --card-bg: rgba(255, 255, 255, 0.05);
         }
 
         body {
-            margin: 0;
-            background: var(--dark-bg);
-            color: #fff;
+            margin: 0; background: var(--dark-bg); color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
         }
 
-        /* লগইন ও লোগো স্টাইল */
-        .kp-pulse-circle {
-            width: 80px; height: 80px; border-radius: 50%;
-            background: rgba(1, 255, 149, 0.1);
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px; border: 2px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(1, 255, 149, 0.4);
-            animation: pulse-glow 2s infinite;
-        }
-        .kp-pulse-circle img { width: 55px; height: 55px; border-radius: 50%; }
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(1, 255, 149, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(1, 255, 149, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(1, 255, 149, 0); }
+        /* ১. সেন্ট্রাল ৩৬০° ঘূর্ণায়মান লোগো */
+        header {
+            width: 100%; padding: 40px 0;
+            text-align: center;
         }
 
-        .login-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #0a0b10 0%, #1a1c25 100%);
-            display: flex; align-items: center; justify-content: center; z-index: 10000;
+        .logo-container {
+            position: relative; width: 150px; height: 150px;
+            margin: 0 auto; display: flex; align-items: center; justify-content: center;
         }
 
-        /* ড্যাশবোর্ড লেআউট */
-        .dashboard-container { display: none; min-height: 100vh; }
-
-        .sidebar {
-            width: var(--sidebar-width);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px; position: fixed; height: 100vh;
+        .rotating-ring {
+            position: absolute; width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top: 4px solid var(--accent-color);
+            border-bottom: 4px solid var(--secondary-color);
+            box-shadow: 0 0 25px rgba(1, 255, 149, 0.4);
+            animation: rotate360 4s linear infinite;
         }
 
-        .main-panel {
-            flex: 1; margin-left: var(--sidebar-width);
-            display: flex; gap: 20px; padding: 30px;
+        .static-logo {
+            width: 105px; height: 105px; border-radius: 50%;
+            z-index: 10; background: #000; padding: 5px;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        /* নিউজ ডিরেক্টরি (বাম কলাম) */
-        .news-directory {
-            width: var(--list-width);
-            background: var(--card-bg);
-            border-radius: 20px; border: 1px solid rgba(1, 255, 149, 0.2);
-            height: calc(100vh - 60px); display: flex; flex-direction: column;
+        @keyframes rotate360 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-        .dir-header { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--accent-color); }
-        #sidebar-list { overflow-y: auto; flex: 1; padding: 10px; }
-        
+
+        /* ২. ড্যাশবোর্ড কন্টেন্ট (সমান দুই ভাগ) */
+        .admin-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 20px 50px;
+            display: none; 
+        }
+
+        .content-grid {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* সমান ৫০/৫০ ভাগ */
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* ৩. নিউজ ডিরেক্টরি (বামপাশ) */
+        .news-sidebar {
+            background: var(--card-bg); border-radius: 20px;
+            border: 1px solid rgba(1, 255, 149, 0.2); 
+            height: 75vh; display: flex; flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: var(--accent-color); font-weight: bold; font-size: 20px;
+            text-align: center; background: rgba(1, 255, 149, 0.05);
+            border-radius: 20px 20px 0 0;
+        }
+
+        #sidebar-list { overflow-y: auto; flex: 1; padding: 15px; }
+
         .news-item {
-            background: rgba(255,255,255,0.03); border-radius: 10px;
-            padding: 12px; margin-bottom: 10px; border-left: 3px solid transparent;
+            background: rgba(255,255,255,0.03); border-radius: 12px;
+            padding: 15px; margin-bottom: 15px; border-left: 5px solid transparent;
             transition: 0.3s;
         }
-        .news-item:hover { background: rgba(1, 255, 149, 0.1); border-left-color: var(--accent-color); }
+        .news-item:hover { border-left-color: var(--accent-color); background: rgba(1, 255, 149, 0.08); }
 
-        /* এডিট ফরম (ডান কলাম) */
-        .edit-area { flex: 1; background: var(--card-bg); padding: 30px; border-radius: 20px; height: fit-content; }
+        /* ৪. এডিট ফরম (ডানপাশ) */
+        .form-area {
+            background: var(--card-bg); padding: 35px; border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
 
         input, textarea, select {
-            width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
-            padding: 12px; border-radius: 10px; color: #fff; margin-top: 8px; margin-bottom: 15px;
+            width: 100%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px; border-radius: 12px; color: #fff; margin-top: 10px; margin-bottom: 20px;
+            box-sizing: border-box; font-size: 16px; transition: 0.3s;
         }
+        input:focus { border-color: var(--accent-color); outline: none; box-shadow: 0 0 10px rgba(1, 255, 149, 0.2); }
+
         .btn-publish {
             background: linear-gradient(45deg, #01ff95, #00d4ff);
-            color: #000; border: none; padding: 15px 30px; border-radius: 12px;
-            font-weight: bold; cursor: pointer; transition: 0.3s;
+            color: #000; border: none; padding: 18px; border-radius: 12px;
+            font-weight: bold; cursor: pointer; width: 100%; font-size: 18px;
+            transition: 0.3s; margin-top: 10px;
         }
+        .btn-publish:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(1, 255, 149, 0.4); }
+
+        /* ৫. লগইন ওভারলে */
+        .login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--dark-bg); display: flex; align-items: center;
+            justify-content: center; z-index: 9999;
+        }
+
+        .action-btns { display: flex; gap: 12px; margin-top: 12px; }
+        .edit-btn { background: var(--accent-color); color: #000; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .del-btn { background: #ff4d4d; color: #fff; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="loginLayer" class="login-overlay">
-        <div style="background: rgba(255,255,255,0.03); padding: 40px; border-radius: 25px; text-align: center; border: 1px solid rgba(1,255,149,0.2); width: 320px;">
-            <div class="kp-pulse-circle"><img src="images (11).png" alt="Logo"></div>
-            <h2>এডমিন লগইন</h2>
+        <div style="text-align: center; width: 340px;">
+            <div class="logo-container">
+                <div class="rotating-ring"></div>
+                <img src="images (11).png" alt="Logo" class="static-logo">
+            </div>
+            <h2 style="margin: 25px 0;">এডমিন লগইন</h2>
             <input type="password" id="passInput" placeholder="সিক্রেট পিন দিন..." style="text-align: center;">
-            <button class="btn-publish" onclick="checkAccess()" style="width: 100%;">প্রবেশ করুন</button>
-            <p id="err" style="color: #ff50e2; display:none; margin-top: 15px;">❌ ভুল পাসওয়ার্ড!</p>
+            <button class="btn-publish" onclick="checkAccess()">প্রবেশ করুন</button>
+            <p id="err" style="color: #ff4d4d; display:none; margin-top: 15px;">❌ ভুল পাসওয়ার্ড!</p>
         </div>
     </div>
 
-    <div id="dashboard" class="dashboard-container">
-        <aside class="sidebar">
-            <div style="text-align: center;">
-                <div class="kp-pulse-circle" style="width: 60px; height: 60px;"><img src="images (11).png" alt="Logo" style="width: 40px; height: 40px;"></div>
-                <span style="color: var(--accent-color); font-weight: bold;">কেশবপুর প্রতিদিন</span>
+    <div id="dashboard" class="admin-container">
+        <header>
+            <div class="logo-container">
+                <div class="rotating-ring"></div>
+                <img src="images (11).png" alt="Logo" class="static-logo">
             </div>
-            <nav style="margin-top: 40px;">
-                <div style="padding: 15px; color: var(--accent-color); cursor: pointer;" onclick="resetForm()"><i class="fas fa-plus"></i> নতুন সংবাদ</div>
-                <div style="padding: 15px; color: #ff50e2; cursor: pointer; margin-top: 20px;" onclick="logout()"><i class="fas fa-power-off"></i> লগ আউট</div>
-            </nav>
-        </aside>
+            <h1 style="color: var(--accent-color); margin: 20px 0 5px; font-size: 32px;">কেশবপুর প্রতিদিন</h1>
+            <p style="color: #888; text-transform: uppercase; font-size: 13px; letter-spacing: 3px;">এডমিন কন্ট্রোল প্যানেল</p>
+            <button onclick="logout()" style="background:none; border: 1px solid #ff4d4d; color:#ff4d4d; padding:5px 15px; border-radius:20px; cursor:pointer; margin-top:15px;">লগ আউট</button>
+        </header>
 
-        <main class="main-panel">
-            <div class="news-directory">
-                <div class="dir-header"><h3><i class="fas fa-list"></i> সংবাদ তালিকা</h3></div>
+        <div class="content-grid">
+            <div class="news-sidebar">
+                <div class="sidebar-header"><i class="fas fa-list-ul"></i> সংবাদ ডিরেক্টরি</div>
                 <div id="sidebar-list">
-                    <p style="text-align: center; color: #888;">লোড হচ্ছে...</p>
+                    <p style="text-align:center; color:#555; margin-top: 50px;">সংবাদ লোড হচ্ছে...</p>
                 </div>
             </div>
 
-            <div class="edit-area">
-                <h2 id="formTitle" style="margin-bottom: 20px;"><i class="fas fa-edit"></i> নতুন সংবাদ লিখুন</h2>
+            <div class="form-area">
+                <h2 id="formTitle" style="margin-bottom: 25px;"><i class="fas fa-edit"></i> সংবাদ প্রকাশ করুন</h2>
                 <form id="newsEntryForm">
-                    <input type="hidden" id="editKey"> <label>সংবাদের শিরোনাম</label>
+                    <input type="hidden" id="editKey">
+                    
+                    <label>শিরোনাম</label>
                     <input type="text" id="newsTitle" placeholder="শিরোনাম লিখুন..." required>
                     
-                    <div style="display: flex; gap: 15px;">
+                    <div style="display: flex; gap: 20px;">
                         <div style="flex: 1;">
                             <label>ক্যাটাগরি</label>
                             <select id="newsCategory">
@@ -141,23 +173,20 @@
                             </select>
                         </div>
                         <div style="flex: 1;">
-                            <label>ছবির লিঙ্ক</label>
-                            <input type="text" id="newsImage" placeholder="https://img.com/photo.jpg">
+                            <label>ছবির URL</label>
+                            <input type="text" id="newsImage" placeholder="লিঙ্ক দিন...">
                         </div>
                     </div>
 
                     <label>বিস্তারিত খবর</label>
-                    <textarea id="newsDetails" rows="10" placeholder="এখানে বিস্তারিত লিখুন..." required></textarea>
+                    <textarea id="newsDetails" rows="12" placeholder="বিস্তারিত এখানে লিখুন..." required></textarea>
 
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span id="statusMsg" style="color: var(--accent-color);"></span>
-                        <button type="submit" id="submitBtn" class="btn-publish">
-                            <i class="fas fa-paper-plane"></i> পাবলিশ করুন
-                        </button>
-                    </div>
+                    <button type="submit" id="submitBtn" class="btn-publish">
+                        <i class="fas fa-paper-plane"></i> পাবলিশ করুন
+                    </button>
                 </form>
             </div>
-        </main>
+        </div>
     </div>
 
     <script type="module" src="admin-script.js"></script>
@@ -165,7 +194,7 @@
         function checkAccess() {
             if(document.getElementById('passInput').value === "admin123") {
                 document.getElementById('loginLayer').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'flex';
+                document.getElementById('dashboard').style.display = 'block';
                 sessionStorage.setItem("adminOK", "true");
             } else { document.getElementById('err').style.display = 'block'; }
         }
@@ -173,7 +202,7 @@
         window.onload = () => {
             if(sessionStorage.getItem("adminOK") === "true") {
                 document.getElementById('loginLayer').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'flex';
+                document.getElementById('dashboard').style.display = 'block';
             }
         }
     </script>

@@ -50,42 +50,37 @@
     <div id="blocker-notice" class="glass" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:9999; border:2px solid red; padding:15px; text-align:center;">
         ⚠️ আপনার অ্যাড-ব্লকারটি বন্ধ করুন নতুবা ডাউনলোড লিঙ্ক পাবেন না।
     </div>
-
     <div class="bg-visuals">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
     </div>
-
     <nav class="navbar glass">
-    <div class="brand-wrapper">
-        <a href="/" class="brand-content">
-            <div class="logo-circle-container">
-                <div class="kp-pulse-circle">
-                    <img src="images (11).png" alt="KP Logo" class="inner-logo">
-                </div>
-            </div>
-            <div class="header-text-brand">
-        <span class="brand-name">কেশবপুর প্রতিদিন</span><br>
-        <span class="brand-tagline">সত্যের পথে অবিচল</span>
+    <div class="main-header" style="display: flex; align-items: center; gap: 15px;">
+        <div class="kp-logo-box">
+            <div class="kp-ring"></div> 
+            <img src="images (11).png" alt="Logo" class="kp-logo-img">
+        </div>
+        <div class="brand-info" style="display: flex; flex-direction: column;">
+            <h1 class="site-title" style="margin: 0; font-size: 22px; color: #01ff95;">কেশবপুর প্রতিদিন</h1>
+            <p class="site-tagline" style="margin: 0; font-size: 12px; color: #ccc;">সত্যের সন্ধানে প্রতিদিন</p>
+        </div>
     </div>
-            <!-- <div class="logo-text">কেশবপুর<span>প্রতিদিন</span></div> -->
-        </a>
-    </div>
-
+    <div class="nav-menu-wrapper">
     <ul class="nav-links">
-    <li><a href="#">সর্বশেষ</a></li>
-    <li><a href="#">বাংলাদেশ</a></li>
-    <li><a href="#">নির্বাচন</a></li>
-    <li><a href="#">বিশ্ব</a></li>
-    <li><a href="#">বাণিজ্য</a></li>
-    <li><a href="#">মতামত</a></li>
-    <li><a href="#">খেলা</a></li>
-    <li><a href="#">বিনোদন</a></li>
-    <li><a href="#">চাকরি</a></li>
-    <li><a href="#">জীবনযাপন</a></li>
-    <li><a href="#">ভিডিও</a></li>
-</ul>
-
+        <li><a href="#">সর্বশেষ</a></li>
+        <li><a href="#">বাংলাদেশ</a></li>
+        <li><a href="#">নির্বাচন</a></li>
+        <li><a href="#">বিশ্ব</a></li>
+        <li><a href="#">বাণিজ্য</a></li>
+        <li><a href="#">মতামত</a></li>
+        <li><a href="#">খেলা</a></li>
+        <li><a href="#">বিনোদন</a></li>
+        <li><a href="#">চাকরি</a></li>
+        <li><a href="#">জীবনযাপন</a></li>
+        <li><a href="#">ভিডিও</a></li>
+        </ul>
+    </div>
+</div>
     <div class="nav-right">
         <button id="openAuth" class="neon-btn-login">
             <i class="fas fa-sign-in-alt"></i> প্রবেশ করুন
@@ -152,7 +147,6 @@
         </h3>
         <a href="#" class="view-all-btn">আরও দেখুন <i class="fas fa-arrow-right"></i></a>
     </div>
-
     <div class="calendar-body">
         <div class="month-selector">
             <button id="prevMonth" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
@@ -171,21 +165,17 @@
     </div>
 </div>
         </aside>
-
-        <main class="main-content">
-        <main class="container">
+    <main class="container">
     <div style="margin: 40px 0 30px; text-align: center;">
         <div class="taza-khobor-btn">
             <span class="live-dot"></span>
             <h2 class="btn-text">আজকের তাজা খবর</h2>
         </div>
     </div>
-
     <div id="news-container" class="news-grid-layout">
         <p style="text-align: center; color: #888; grid-column: 1/-1;">খবর লোড হচ্ছে...</p>
     </div>
-</main>
-
+    </main>
 <style>
 /* বাটন স্টাইল */
 .taza-khobor-btn {
@@ -200,7 +190,6 @@
     transition: all 0.4s ease; /* রঙ পরিবর্তনের গতি */
     border: 2px solid transparent;
 }
-
 /* হোভার করলে যা ঘটবে */
 .taza-khobor-btn:hover {
     background: #000; /* ব্যাকগ্রাউন্ড কালো হবে */
@@ -208,7 +197,6 @@
     transform: translateY(-3px); /* সামান্য উপরে উঠবে */
     box-shadow: 0 8px 25px rgba(1, 255, 149, 0.5);
 }
-
 .btn-text {
     color: #000; 
     margin: 0; 
@@ -216,12 +204,10 @@
     font-weight: bold;
     transition: all 0.4s ease;
 }
-
 /* হোভার করলে টেক্সট সাদা হবে */
 .taza-khobor-btn:hover .btn-text {
     color: #01ff95;
 }
-
 /* লাইভ ডট অ্যানিমেশন */
 .live-dot {
     width: 12px; 
@@ -230,17 +216,61 @@
     border-radius: 50%; 
     animation: pulse 1.5s infinite;
 }
-
 @keyframes pulse {
     0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
     70% { transform: scale(1.2); opacity: 0.5; box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
     100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
 }
+/* এডমিন প্যানেল গ্রেড গ্লোয়িং ফুটার লোগো */
+.kp-footer-logo-final {
+    width: 75px !important;
+    height: 75px !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000 !important; /* এডমিনের মতো ডার্ক বেস */
+    z-index: 5 !important;
+}
+/* ঘূর্ণায়মান চিকন রিং */
+.kp-footer-logo-final::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: -4px !important;
+    border-radius: 50% !important;
+    padding: 3px !important;
+    background: linear-gradient(0deg, #01ff95, #00d4ff, transparent, transparent) !important;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: admin-rotate 3s linear infinite !important;
+}
+/* আসল নিয়ন গ্লো (যাতে আলোটা চারদিকে ছড়িয়ে পড়ে) */
+.kp-footer-logo-final::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: -6px !important; /* বর্ডারের বাইরে আলো ছাড়ার জন্য */
+    border-radius: 50% !important;
+    background: linear-gradient(0deg, #01ff95, #00d4ff, transparent, transparent) !important;
+    filter: blur(15px) !important; /* এডমিন প্যানেলের গ্লো ইফেক্ট */
+    opacity: 1 !important;
+    z-index: -1 !important;
+    animation: admin-rotate 3s linear infinite !important;
+}
+.footer-img-fixed {
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 50% !important;
+    z-index: 10 !important;
+    position: relative !important;
+}
+@keyframes admin-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 </style>
-
 <div id="adminNewsList"></div>
-
-
 <div class="trending-section">
 </div>
             <div class="hero-card glass">
@@ -276,12 +306,10 @@
             </div>
         </div>
     </div>
-
     <div class="popular-news-section">
     <h3 class="w-title" style="text-align: center;">
         <i class="fas fa-bolt"></i> জনপ্রিয় ও বাস্তবধর্মী সংবাদ
     </h3>
-    
     <div class="featured-video-card">
         <div class="video-thumb featured-thumb">
             <iframe src="https://www.youtube.com/embed/VIDEO_ID_MAIN" frameborder="0" allowfullscreen></iframe>
@@ -296,7 +324,6 @@
             <a href="#" class="read-more">পূর্ণাঙ্গ ভিডিও দেখুন</a>
         </div>
     </div>
-
     <div class="video-grid-4">
         <div class="content-card">
             <div class="news-thumb small-thumb">
@@ -309,7 +336,6 @@
                 <a href="#" class="read-more">বিস্তারিত</a>
             </div>
         </div>
-
         <div class="content-card">
             <div class="news-thumb small-thumb">
                 <img src="news-image-2.jpg" alt="News Image">
@@ -321,7 +347,6 @@
                 <a href="#" class="read-more">বিস্তারিত</a>
             </div>
         </div>
-
         <div class="content-card">
             <div class="news-thumb small-thumb">
                 <img src="news-image-3.jpg" alt="News Image">
@@ -333,7 +358,6 @@
                 <a href="#" class="read-more">বিস্তারিত</a>
             </div>
         </div>
-
         <div class="content-card">
             <div class="news-thumb small-thumb">
                 <img src="news-image-4.jpg" alt="News Image">
@@ -349,30 +373,29 @@
 </div>
 </section>
         </main>
-
         <aside class="right-sidebar">
         <div class="widget glass">
                 <h3 class="w-title"><i class="fas fa-bolt"></i> দ্রুত আপডেট</h3>
                 <div class="update-box">
                     <div class="update-item">
                         <span class="u-time">১০ মিনিট আগে</span>
-                        <p>ইরানের হামলায় আমিরাতে এক বাংলাদেশি নিহত।</p>
+                        <p>৫জি নেটওয়ার্কের নতুন মাইলফলক স্পর্শ করলো বাংলাদেশ।</p>
                     </div>
                     <div class="update-item">
                         <span class="u-time">২৫ মিনিট আগে</span>
-                        <p>ইরানের হামলায় উপসাগরীয় দেশগুলোর ‘নিরাপদ আশ্রয়’ ভাবমূর্তি ভেঙে পড়েছে।</p>
+                        <p>ডিজিটাল কারেন্সিতে বড় পরিবর্তনের আভাস দিচ্ছে কেন্দ্রীয় ব্যাংক।</p>
                     </div>
                     <div class="update-item">
                         <span class="u-time">৪৫ মিনিট আগে</span>
-                        <p>ইফতার করতে গিয়ে গ্রেপ্তার সাবেক এমপি শাহ আলম কারাগারে।</p>
+                        <p>স্মার্ট কার্ডে যুক্ত হচ্ছে নতুন ই-পাসপোর্ট সুবিধা।</p>
                     </div>
                     <div class="update-item">
                         <span class="u-time">১ ঘণ্টা আগে</span>
-                        <p>ইরানে সরকার পরিবর্তন হলে ক্ষমতা দখলের লড়াইয়ে নামতে পারে কারা।</p>
+                        <p>ফ্রিল্যান্সিং খাতে সরকারি বিশেষ অনুদান প্রকল্প উদ্বোধন।</p>
                     </div>
                     <div class="update-item">
                         <span class="u-time">২ ঘণ্টা আগে</span>
-                        <p>টিকটকে প্রেম, রাজবাড়ীতে দেখা করতে এসে দলবদ্ধ ধর্ষণের শিকার তরুণী।</p>
+                        <p>মেট্রোরেলের নতুন রুট চালু হচ্ছে আগামী মাসের ১ তারিখ।</p>
                     </div>
                 </div>
                 <button class="btn-gradient-small">সব আপডেট দেখুন <i class="fas fa-arrow-right"></i></button>
@@ -408,7 +431,6 @@
         </div>
     </div>
 </div>
-
 <div class="widget glass weather-widget">
     <h3 class="w-title"><i class="fas fa-cloud-sun"></i> আজকের আবহাওয়া</h3>
     <div class="weather-content">
@@ -424,22 +446,19 @@
     </div>
     </div>
     </aside>
-        
     </main>
-
 <footer class="footer-glass h-footer">
     <div class="h-footer-container">
         <div class="h-footer-col">
-            <div class="footer-logo-container">
-    <div class="kp-pulse-circle">
-                    <img src="images (11).png" alt="KP Logo" class="inner-logo">
-                </div>
-    <div class="footer-text-brand">
-        <span class="brand-name">কেশবপুর প্রতিদিন</span>
-        <span class="brand-tagline">সত্যের পথে অবিচল</span>
+            <div class="footer-brand-section" style="display: flex; align-items: center; gap: 15px; overflow: visible !important;">
+    <div class="kp-footer-logo-final">
+        <img src="images (11).png" alt="Logo" class="footer-img-fixed">
+    </div>
+    <div>
+        <h2 style="color: #01ff95; margin: 0; font-size: 24px; text-shadow: 0 0 10px rgba(1, 255, 149, 0.6);">কেশবপুর প্রতিদিন</h2>
+        <p style="color: #ccc; margin: 0; font-size: 13px;">সত্যের পথে অবিচল</p>
     </div>
 </div>
-
             <p class="h-desc">নির্ভীক সাংবাদিকতা এবং সঠিক তথ্য নিয়ে আমরা পাশে আছি প্রতিটি মুহূর্তে।</p>
             <h3>Keshabpur Pratidin</h3>
         <p>Keshabpur, Jashore, Bangladesh.</p>
@@ -448,21 +467,18 @@
             Phone No. : 01729141489, 01305434329.
         </p>
         </div>
-
         <div class="h-footer-col links-sec">
     <h4 class="col-title">লিঙ্কসমূহ</h4>
     <div class="neon-link-wrapper">
         <a href="#" class="neon-span-btn">আমাদের সম্পর্কে</a>
         <a href="#" class="neon-span-btn">বিজ্ঞাপন</a>
         <a href="#" class="neon-span-btn">গোপনীয়তা নীতি</a>
-        <a href="#" class="neon-span-btn">যোগাযোগ</a>
-        
+        <a href="#" class="neon-span-btn">যোগাযোগ</a>    
         <a href="#" class="neon-span-btn">আর্কাইভ</a>
         <a href="#" class="neon-span-btn">লেখক তালিকা</a>
         <a href="#" class="neon-span-btn pink">সংবাদ পাঠান</a> <a href="#" class="neon-span-btn">ব্যবহারের শর্তাবলী</a>
     </div>
 </div>
-
         <div class="newsletter-box">
             <h4 class="col-title">নিউজলেটার</h4>
             <div class="neon-input-wrapper">
@@ -489,7 +505,6 @@
                 <span><small>Download on the</small><br>App Store</span>
             </a>
         </div>
-
         <div class="footer-contact-mini">
             <div class="contact-inline">
                 <span><i class="fas fa-phone-alt"></i> বিজ্ঞাপন: ০১৭২৯-১৪১৪৮৯</span>
@@ -520,12 +535,9 @@
     </div>
 </div>
 </footer>
-
-
     <div id="authModal" class="modal">
     <div class="modal-content">
         <span class="close-auth" id="closeModal">&times;</span>
-        
         <div class="auth-box" id="authBox">
             <div class="form-container sign-up-container">
                 <form id="regForm">
@@ -542,7 +554,6 @@
                     <button type="submit" class="btn-action">Sign Up</button>
                 </form>
             </div>
-
             <div class="form-container sign-in-container">
                 <form id="loginForm">
                     <div class="form-brand-header">
@@ -558,7 +569,6 @@
                     <button type="submit" class="btn-action">প্রবেশ করুন</button> 
                 </form>
             </div>
-
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
@@ -576,11 +586,9 @@
         </div>
     </div>
 </div>
-
 <div id="adModal" class="modal">
         <div class="modal-content glass neon-border-green">
             <h3>🎁 লিঙ্ক প্রস্তুত হচ্ছে...</h3>
-            
             <div class="ad-slot glass" style="min-height: 250px; margin: 15px 0; display: flex; align-items: center; justify-content: center;">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -592,7 +600,6 @@
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-
             <div id="timerBox">
                 <p><span id="sec">15</span> সেকেন্ড অপেক্ষা করুন</p>
                 <div class="progress-bar"><div id="bar"></div></div>
@@ -600,7 +607,6 @@
             <a id="dlLink" href="#" target="_blank" class="neon-btn green" style="display:none;">📥 এখনই ডাউনলোড করুন</a>
         </div>
     </div>
-
     <script src="script.js"></script>
     <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -620,38 +626,26 @@
   const db = getDatabase(app);
   const newsContainer = document.getElementById('news-container');
 
-  if (newsContainer) {
-    onValue(ref(db, 'news'), (snapshot) => {
-      const data = snapshot.val();
+  // ফায়ারবেস থেকে নিউজ পড়া শুরু
+  onValue(ref(db, 'news'), (snapshot) => {
+    const data = snapshot.val();
+    if (data && newsContainer) {
       newsContainer.innerHTML = ''; 
-
-      if (data) {
-        Object.keys(data).reverse().forEach(key => {
-          const news = data[key];
-          const newsHtml = `
-            <div class="news-card">
-              <img src="${news.image}" alt="news" onerror="this.src='https://via.placeholder.com/400x250'">
-              <div class="news-card-body">
-                <span class="category-tag">${news.category}</span>
-                <h3 style="margin-top:10px; color:#fff;">${news.title}</h3>
-                <p style="color:#ccc; font-size:14px;">${news.details.substring(0, 100)}...</p>
-                <div style="margin-top:10px; font-size:12px; color:#01ff95;">
-                  <i class="fas fa-clock"></i> ${news.date || ''}
-                </div>
-              </div>
-            </div>`;
-          newsContainer.innerHTML += newsHtml;
-        });
-      } else {
-        newsContainer.innerHTML = '<p style="text-align:center; grid-column:1/-1;">এখনো কোনো সংবাদ নেই।</p>';
-      }
-    });
-  }
+      Object.keys(data).reverse().forEach(key => {
+        const news = data[key];
+        newsContainer.innerHTML += `
+          <div class="news-card">
+            <img src="${news.image}" onerror="this.src='https://via.placeholder.com/400x250'">
+            <div class="news-card-body">
+              <span class="category-tag">${news.category}</span>
+              <h3>${news.title}</h3>
+              <p>${news.details.substring(0, 100)}...</p>
+              <small>${news.date}</small>
+            </div>
+          </div>`;
+      });
+    }
+  });
 </script>
 </body>
-
 </html>
-
-
-
-

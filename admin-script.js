@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// সংবাদ তালিকা লোড করা (বামপাশে)
+// ডিরেক্টরি লোড
 const sidebarList = document.getElementById('sidebar-list');
 onValue(ref(db, 'news'), (snapshot) => {
     const data = snapshot.val();
@@ -25,20 +25,21 @@ onValue(ref(db, 'news'), (snapshot) => {
             const div = document.createElement('div');
             div.className = 'news-item';
             div.innerHTML = `
-                <div style="font-size: 14px; margin-bottom: 8px;">${news.title.substring(0, 40)}...</div>
-                <div style="display:flex; gap: 10px;">
-                    <button onclick="editNews('${key}')" style="background:#01ff95; border:none; padding:3px 10px; border-radius:5px; cursor:pointer; font-size:12px;">এডিট</button>
-                    <button onclick="deleteNews('${key}')" style="background:#ff4d4d; color:white; border:none; padding:3px 10px; border-radius:5px; cursor:pointer; font-size:12px;">ডিলিট</button>
+                <div style="font-weight:bold; color:#01ff95; font-size:14px;">${news.category} | ${news.date || ''}</div>
+                <div style="font-size:16px; margin:8px 0; line-height:1.4; color:#fff;">${news.title}</div>
+                <div class="action-btns">
+                    <button class="edit-btn" onclick="editNews('${key}')"><i class="fas fa-edit"></i> এডিট</button>
+                    <button class="del-btn" onclick="deleteNews('${key}')"><i class="fas fa-trash"></i> ডিলিট</button>
                 </div>
             `;
             sidebarList.appendChild(div);
         });
     } else {
-        sidebarList.innerHTML = '<p style="text-align:center; color:#888;">কোনো নিউজ নেই</p>';
+        sidebarList.innerHTML = '<p style="text-align:center; color:#555;">কোন সংবাদ পাওয়া যায়নি।</p>';
     }
 });
 
-// পাবলিশ বা আপডেট করা
+// সেভ বা আপডেট
 document.getElementById('newsEntryForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const key = document.getElementById('editKey').value;
@@ -51,16 +52,13 @@ document.getElementById('newsEntryForm').addEventListener('submit', (e) => {
     const newsData = { title, category, image, details, date };
 
     if (key) {
-        // আপডেট (Edit)
         set(ref(db, 'news/' + key), newsData).then(() => {
-            alert("সংবাদটি আপডেট হয়েছে!");
+            alert("সফলভাবে আপডেট হয়েছে!");
             resetForm();
         });
     } else {
-        // নতুন পোস্ট (Push)
-        const newPostRef = push(ref(db, 'news'));
-        set(newPostRef, newsData).then(() => {
-            alert("সংবাদটি পাবলিশ হয়েছে!");
+        push(ref(db, 'news'), newsData).then(() => {
+            alert("সফলভাবে পাবলিশ হয়েছে!");
             resetForm();
         });
     }
@@ -68,32 +66,29 @@ document.getElementById('newsEntryForm').addEventListener('submit', (e) => {
 
 // এডিট ফাংশন
 window.editNews = (key) => {
-    const newsRef = ref(db, 'news/' + key);
-    get(newsRef).then((snapshot) => {
+    get(ref(db, 'news/' + key)).then((snapshot) => {
         const news = snapshot.val();
         document.getElementById('editKey').value = key;
         document.getElementById('newsTitle').value = news.title;
         document.getElementById('newsCategory').value = news.category;
         document.getElementById('newsImage').value = news.image;
         document.getElementById('newsDetails').value = news.details;
-        
-        document.getElementById('formTitle').innerHTML = '<i class="fas fa-sync"></i> সংবাদ আপডেট করুন';
-        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-check"></i> আপডেট করুন';
-        window.scrollTo(0, 0);
+        document.getElementById('formTitle').innerHTML = "<i class='fas fa-sync-alt'></i> সংবাদ আপডেট করুন";
+        document.getElementById('submitBtn').innerHTML = "আপডেট নিশ্চিত করুন";
+        window.scrollTo({top: 0, behavior: 'smooth'});
     });
 };
 
 // ডিলিট ফাংশন
 window.deleteNews = (key) => {
-    if (confirm("আপনি কি নিশ্চিতভাবে এই খবরটি মুছে ফেলতে চান?")) {
-        remove(ref(db, 'news/' + key)).then(() => alert("ডিলিট সফল!"));
+    if(confirm("আপনি কি নিশ্চিত যে খবরটি মুছে ফেলতে চান?")) {
+        remove(ref(db, 'news/' + key)).then(() => alert("খবরটি মুছে ফেলা হয়েছে!"));
     }
 };
 
-// ফরম রিসেট
-window.resetForm = () => {
+function resetForm() {
     document.getElementById('newsEntryForm').reset();
     document.getElementById('editKey').value = '';
-    document.getElementById('formTitle').innerHTML = '<i class="fas fa-plus-circle"></i> নতুন সংবাদ প্রকাশ করুন';
-    document.getElementById('submitBtn').innerHTML = '<i class="fas fa-paper-plane"></i> পাবলিশ করুন';
-};
+    document.getElementById('formTitle').innerHTML = "<i class='fas fa-edit'></i> সংবাদ প্রকাশ করুন";
+    document.getElementById('submitBtn').innerHTML = "পাবলিশ করুন";
+}

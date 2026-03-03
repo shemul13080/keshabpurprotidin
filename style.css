@@ -23,13 +23,11 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--dark); color:
     box-shadow: 0 0 15px var(--neon-p);
     transform: scale(1.05);
 }
-
 /* Navbar & Dropdown Fix */
 .navbar { position: fixed; top: 20px; left: 5%; right: 5%; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; z-index: 1000; }
 .logo span { color: var(--accent); font-weight: 800; }
 .nav-links { display: flex; list-style: none; gap: 30px; }
 .nav-links a { text-decoration: none; color: #fff; font-weight: 600; }
-
 .dropdown { position: relative; }
 .dropdown-content { 
     display: none; position: absolute; top: 100%; left: 0; min-width: 180px; 
@@ -944,13 +942,12 @@ form button:active {
 
 /* নেভিগেশন লিঙ্কগুলোর ডিফল্ট কালার */
 .nav-links a {
+    position: relative; /* এটি আন্ডারলাইনকে টেক্সটের সাথে আটকে রাখবে */
+    display: inline-block;
+    padding: 10px 15px;
+    color: #fff;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.8); /* হালকা সাদা, যা চোখে আরামদায়ক */
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    position: relative;
-    padding: 5px 0;
+    z-index: 1;
 }
 
 /* মাউস নিলে (Hover) বা সিলেক্ট থাকলে (Active) কালার */
@@ -968,16 +965,13 @@ form button:active {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--accent);
+    background: #01ff95;
     transition: width 0.3s ease;
-    box-shadow: 0 0 10px var(--accent);
+    box-shadow: 0 0 10px #01ff95;
 }
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
+.nav-links a:hover::after {
     width: 100%;
 }
-
 /* ফর্মের ভেতরের ব্র্যান্ড হেডার */
 .form-brand-header {
     display: flex;
@@ -3238,3 +3232,115 @@ h3{
 
 .news-card-body { padding: 15px; }
 .category-tag { background: #01ff95; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+/* মেইন হেডার ফিক্স */
+.main-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 10px 15px !important;
+    position: relative;
+    background: transparent; /* গ্লাস ইফেক্ট বজায় রাখার জন্য */
+}
+/* ভুল পজিশনে থাকা টেক্সট ফিক্স */
+.navbar.glass > span, 
+.navbar.glass > a:first-child:not(.main-header a) {
+    display: none !important; /* কন্টেইনারের বাইরে থাকা আলগা লেখা মুছে ফেলার জন্য */
+}
+/* টেক্সটগুলোকে ওপর-নিচে সাজানোর জন্য */
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* টেক্সট গ্রুপ ডিজাইন */
+.brand-text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* লোগো বক্সের পজিশন ঠিক রাখা */
+.kp-logo-box {
+    position: relative;
+    width: 100px; /* আপনার প্রয়োজন অনুযায়ী ছোট-বড় করতে পারেন */
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kp-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid #01ff95; /* নিয়ন সবুজ রং */
+    border-bottom: 3px solid #f84ef8; /* নিয়ন নীল রং */
+    box-shadow: 0 0 20px rgba(1, 255, 149, 0.3);
+    animation: rotate360 4s linear infinite; /* ৩৬° ঘূর্ণায়মান অ্যানিমেশন */
+}
+
+/* লোগো ইমেজের পজিশন নিশ্চিত করা */
+.kp-logo-img {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50%;
+}
+
+@keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.site-title {
+    color: #01ff95 !important;
+    font-size: 24px !important;
+    margin: 0 !important;
+    font-weight: bold;
+}
+
+.site-tagline {
+    color: #ccc !important;
+    font-size: 13px !important;
+    margin: 0 !important;
+}
+/* মেইন ফুটার কন্টেইনার */
+.main-footer {
+    background: #0a0b10; /* ফুটারের ব্যাকগ্রাউন্ড আরও ডার্ক করা হয়েছে */
+    padding: 60px 20px;
+    border-top: 1px solid rgba(1, 255, 149, 0.1);
+}
+/* লোগো এবং টেক্সটকে এক লাইনে রাখার জন্য */
+.brand-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    z-index: 10;
+}
+
+.brand-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* টেক্সট গ্রুপকে ওপর-নিচে রাখার জন্য */
+.brand-text-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* আপনার স্ক্রিনশটে যে তারিখের বক্সটি ভেঙেছে তা ঠিক করতে */
+.date-social-box {
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+}
+/* পেজের একদম টপ-লেফটে থাকা অনাকাঙ্ক্ষিত এলিমেন্ট লুকানোর চূড়ান্ত কমান্ড */
+body > .nav-links:first-of-type, 
+body > span:first-of-type {
+    display: none !important;
+}
