@@ -3575,3 +3575,37 @@ h3{
     font-size: 12px !important;
     margin: 0 !important;
 }
+/* লোগো বক্সের পজিশন ঠিক রাখা */
+.kp-logo-box2 {
+    position: relative;
+    width: 45px; /* আপনার প্রয়োজন অনুযায়ী ছোট-বড় করতে পারেন */
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+.kp-ring2 {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid #01ff95; /* নিয়ন সবুজ রং */
+    border-bottom: 3px solid #f84ef8; /* নিয়ন নীল রং */
+    box-shadow: 0 0 20px rgba(1, 255, 149, 0.3);
+    animation: rotate360 4s linear infinite; /* ৩৬° ঘূর্ণায়মান অ্যানিমেশন */
+}
+.site-title3 {
+    color: #01ff95 !important;
+    font-size: 12px !important;
+    margin: 0 !important;
+    font-weight: bold;
+}
+
+.site-tagline3 {
+    color: #ccc !important;
+    font-size: 8px !important;
+    margin: 0 !important;
+}
