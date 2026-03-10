@@ -42,39 +42,24 @@
     <div class="game-grid" id="game-list"></div>
 
     <script>
-        const games = [
-            {name: "স্লট কিং", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300"},
-            {name: "ফিশ হান্টার", img: "https://images.unsplash.com/photo-1524704796725-9fc306412128?w=300"},
-            {name: "কার্ড মাস্টার", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=300"},
-            {name: "লুডু স্টার", img: "https://images.unsplash.com/photo-1612287230202-1ffbe77261c8?w=300"},
-            {name: "কার রেস", img: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=300"},
-            {name: "টেনিস ৩ডি", img: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c6?w=300"},
-            {name: "শুটার প্রো", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=300"},
-            {name: "বক্সিং", img: "https://images.unsplash.com/photo-1599058917212-d750089bc070?w=300"},
-            {name: "ফুটবল", img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300"},
-            {name: "ক্যান্ডি গেম", img: "https://images.unsplash.com/photo-1582058013653-b952d921389e?w=300"},
-            {name: "ড্রাগন ফাইট", img: "https://images.unsplash.com/photo-1605371924599-2d0365da5c80?w=300"},
-            {name: "গোল্ড রাশ", img: "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=300"},
-            {name: "মাইনস", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=300"},
-            {name: "রুলেট", img: "https://images.unsplash.com/photo-1606167668584-78701c57613d?w=300"},
-            {name: "ব্ল্যাকজ্যাক", img: "https://images.unsplash.com/photo-1598970434620-13f5686036f0?w=300"},
-            {name: "ক্রাশ গেম", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300"},
-            {name: "আইস ব্রেকার", img: "https://images.unsplash.com/photo-1590455073041-0570b6d21e87?w=300"},
-            {name: "জঙ্গল অ্যাডভেঞ্চার", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300"},
-            {name: "স্পেস মিশন", img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=300"},
-            {name: "চেস মাস্টার", img: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=300"}
-        ];
-
-        const container = document.getElementById('game-list');
-        games.forEach(game => {
-            container.innerHTML += `
-                <div class="game-card">
-                    <img src="${game.img}" alt="${game.name}">
-                    <p style="margin:5px 0; font-size:13px;">${game.name}</p>
-                    <a href="#" class="play-btn"><i class="fas fa-play"></i> খেলুন</a>
-                </div>
-            `;
-        });
-    </script>
+    const games = ["স্লট কিং", "ফিশ হান্টার", "কার্ড মাস্টার", "লুডু স্টার", "রেসিং ২", "কার রেস", "টেনিস ৩ডি", "শুটার প্রো", "বক্সিং", "ফুটবল", "ক্যান্ডি গেম", "ড্রাগন ফাইট", "গোল্ড রাশ", "মাইনস", "রুলেট", "ব্ল্যাকজ্যাক", "ক্রাশ গেম", "আইস ব্রেকার", "জঙ্গলে অ্যাডভেঞ্চার", "স্পেস মিশন"];
+    
+    const container = document.getElementById('game-list');
+    
+    games.forEach((game, i) => {
+        // এখানে i + 1 মানে হলো ১ থেকে ২০ পর্যন্ত ছবির নাম
+        let imagePath = `images/${i + 1}.jpg`;
+        
+        container.innerHTML += `
+            <div class="game-card">
+                <img src="${imagePath}" 
+                     onerror="this.src='https://via.placeholder.com/300x200?text=Image+Missing'" 
+                     alt="${game}">
+                <p style="margin:5px 0; font-size:13px; color:#fff;">${game}</p>
+                <a href="#" class="play-btn"><i class="fas fa-play"></i> খেলুন</a>
+            </div>
+        `;
+    });
+</script>
 </body>
 </html>

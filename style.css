@@ -3609,3 +3609,19 @@ h3{
     font-size: 8px !important;
     margin: 0 !important;
 }
+/* নেভিগেশন বারকে স্ক্রিনের উপরে ফিক্সড রাখার জন্য */
+header, nav, .navbar {
+    position: fixed; /* স্ক্রল করলেও মেনু উপরেই থাকবে */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999 !important; 
+    margin-top: 0; /* মার্জিন সরিয়ে দিলাম যেন উপরে লেগে থাকে */
+}
+
+/* বিজ্ঞাপনের জায়গা ঠিক করার জন্য (যেন মেনুর নিচে থাকে) */
+.ad-container {
+    margin-top: 80px; /* মেনুর উচ্চতার চেয়ে কিছুটা বেশি মার্জিন দিন */
+    position: relative;
+    z-index: 10;
+}
