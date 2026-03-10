@@ -2,61 +2,79 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>প্রো গেমিং জোন - কেশবপুর প্রতিদিন</title>
+    <title>প্রো গেমিং জোন | কেশবপুর প্রতিদিন</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
+
     <style>
-        :root { --neon: #01ff95; --bg: #0b0f19; }
-        body { background: var(--bg); color: #fff; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
-        
-        /* মেইন স্লট বক্স */
-        .slot-container { width: 350px; border: 2px solid var(--neon); padding: 20px; border-radius: 20px; background: rgba(0,0,0,0.8); box-shadow: 0 0 20px rgba(1, 255, 149, 0.3); text-align: center; }
-        
-        /* স্কোর বোর্ড */
-        .board { display: flex; justify-content: space-between; margin-bottom: 20px; }
-        .score { border: 1px solid var(--neon); padding: 5px 10px; border-radius: 8px; font-size: 14px; }
+        :root { --neon: #01ff95; --bg: #0a0e17; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Hind Siliguri', sans-serif; margin: 0; padding: 20px; }
+        .game-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        @media (max-width: 768px) { .game-grid { grid-template-columns: repeat(2, 1fr); } }
 
-        /* স্লট হুইল */
-        .wheel { width: 200px; height: 200px; border-radius: 50%; border: 6px solid #333; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: var(--neon); background: #000; box-shadow: inset 0 0 30px #000; transition: transform 4s ease-out; }
-
-        /* বাটন ও অ্যাড */
-        .spin-btn { width: 100%; padding: 15px; background: var(--neon); border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .ad-box { margin-top: 20px; min-height: 250px; background: #111; border: 1px dashed #444; }
+        .game-card { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); text-align: center; transition: 0.3s; }
+        .game-card img { width: 100%; height: 100px; border-radius: 10px; object-fit: cover; margin-bottom: 8px; }
+        
+        /* আকর্ষণীয় প্লে বাটন */
+        .play-btn { 
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 20px; background: var(--neon); color: #000; text-decoration: none; 
+            border-radius: 25px; font-weight: bold; font-size: 13px; gap: 8px;
+            box-shadow: 0 4px 15px rgba(1, 255, 149, 0.3); transition: 0.3s;
+        }
+        .play-btn:hover { transform: scale(1.05); background: #fff; }
     </style>
 </head>
 <body>
 
-<div class="slot-container">
-    <h2 style="color: var(--neon);">⚡ PRO GAMING ZONE</h2>
-    <div class="board">
-        <div class="score">ক্রেডিট: <span id="bal">500</span></div>
-        <div class="score">উইন: <span id="win">0</span></div>
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: var(--neon);">⚡ প্রো গেমিং জোন</h1>
+        
+        <div style="margin: 20px auto; min-height: 250px;">
+            <script type="text/javascript">
+              atOptions = { 'key' : '62a2c41178da94703bfa73a15df0c25c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+            </script>
+            <script src="https://www.highperformanceformat.com/62a2c41178da94703bfa73a15df0c25c/invoke.js"></script>
+        </div>
     </div>
 
-    <div class="wheel" id="wheel">00</div>
+    <div class="game-grid" id="game-list"></div>
 
-    <div class="ad-box">
-        <script type="text/javascript">
-          atOptions = { 'key' : '62a2c41178da94703bfa73a15df0c25c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
-        </script>
-        <script src="https://www.highperformanceformat.com/62a2c41178da94703bfa73a15df0c25c/invoke.js"></script>
-    </div>
+    <script>
+        const games = [
+            {name: "স্লট কিং", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300"},
+            {name: "ফিশ হান্টার", img: "https://images.unsplash.com/photo-1524704796725-9fc306412128?w=300"},
+            {name: "কার্ড মাস্টার", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=300"},
+            {name: "লুডু স্টার", img: "https://images.unsplash.com/photo-1612287230202-1ffbe77261c8?w=300"},
+            {name: "কার রেস", img: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=300"},
+            {name: "টেনিস ৩ডি", img: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c6?w=300"},
+            {name: "শুটার প্রো", img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=300"},
+            {name: "বক্সিং", img: "https://images.unsplash.com/photo-1599058917212-d750089bc070?w=300"},
+            {name: "ফুটবল", img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300"},
+            {name: "ক্যান্ডি গেম", img: "https://images.unsplash.com/photo-1582058013653-b952d921389e?w=300"},
+            {name: "ড্রাগন ফাইট", img: "https://images.unsplash.com/photo-1605371924599-2d0365da5c80?w=300"},
+            {name: "গোল্ড রাশ", img: "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=300"},
+            {name: "মাইনস", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=300"},
+            {name: "রুলেট", img: "https://images.unsplash.com/photo-1606167668584-78701c57613d?w=300"},
+            {name: "ব্ল্যাকজ্যাক", img: "https://images.unsplash.com/photo-1598970434620-13f5686036f0?w=300"},
+            {name: "ক্রাশ গেম", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300"},
+            {name: "আইস ব্রেকার", img: "https://images.unsplash.com/photo-1590455073041-0570b6d21e87?w=300"},
+            {name: "জঙ্গল অ্যাডভেঞ্চার", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300"},
+            {name: "স্পেস মিশন", img: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=300"},
+            {name: "চেস মাস্টার", img: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=300"}
+        ];
 
-    <button class="spin-btn" onclick="spin()">স্পিন করুন</button>
-</div>
-
-<script>
-    function spin() {
-        let wheel = document.getElementById('wheel');
-        let val = Math.floor(Math.random() * 99);
-        wheel.style.transform = "rotate(3600deg)";
-        setTimeout(() => {
-            wheel.innerText = val < 10 ? "0" + val : val;
-            wheel.style.transform = "rotate(0deg)";
-            document.getElementById('win').innerText = val;
-        }, 4000);
-    }
-</script>
-
-<script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
-
+        const container = document.getElementById('game-list');
+        games.forEach(game => {
+            container.innerHTML += `
+                <div class="game-card">
+                    <img src="${game.img}" alt="${game.name}">
+                    <p style="margin:5px 0; font-size:13px;">${game.name}</p>
+                    <a href="#" class="play-btn"><i class="fas fa-play"></i> খেলুন</a>
+                </div>
+            `;
+        });
+    </script>
 </body>
 </html>
