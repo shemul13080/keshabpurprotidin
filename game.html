@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লাকি স্পিন - কেশবপুর প্রতিদিন</title>
+    <style>
+        body { background: #0b0f19; color: #fff; font-family: 'Hind Siliguri', sans-serif; text-align: center; padding: 20px; }
+        .spin-container { margin: 30px auto; position: relative; width: 300px; }
+        #wheel { width: 100%; height: auto; border: 5px solid #01ff95; border-radius: 50%; transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); box-shadow: 0 0 20px #01ff95; }
+        .pointer { font-size: 40px; color: #ff0000; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10; }
+        button { margin-top: 20px; padding: 15px 40px; background: #01ff95; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; color: #000; }
+        .ad-container { margin-top: 40px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 10px; min-height: 250px; }
+    </style>
+</head>
+<body>
+    <h1>🎁 কেশবপুর প্রতিদিন স্পিন এন্ড উইন!</h1>
+    <p>গেমটি খেলুন এবং নিচের বিজ্ঞাপনগুলোতে খেয়াল রাখুন।</p>
+
+    <div class="spin-container">
+        <div class="pointer">▼</div>
+        <img id="wheel" src="https://i.imgur.com/v8S9vS5.png" alt="Wheel">
+    </div>
+    <button onclick="spin()">স্পিন করুন</button>
+
+    <div class="ad-container">
+        <p style="color: #666; font-size: 12px;">ADVERTISEMENT</p>
+        
+        <script type="text/javascript">
+            // এখানে আপনার Adsterra বিজ্ঞাপনের স্ক্রিপ্ট কোডটি পেস্ট করবেন
+        </script>
+    </div>
+
+    <script>
+        let currentRotation = 0;
+        function spin() {
+            const extraDegree = Math.floor(Math.random() * 360) + 2160; 
+            currentRotation += extraDegree;
+            document.getElementById('wheel').style.transform = `rotate(${currentRotation}deg)`;
+            
+            setTimeout(() => {
+                alert("অভিনন্দন! আপনি পয়েন্ট জিতেছেন। আপনার পুরস্কারটি নিশ্চিত করতে নিচের বিজ্ঞাপনে নজর দিন।");
+            }, 4100);
+        }
+    </script>
+</body>
+</html>
