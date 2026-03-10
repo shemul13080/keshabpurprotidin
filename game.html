@@ -2,87 +2,61 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রিমিয়াম স্পিন - কেশবপুর প্রতিদিন</title>
-    
-    <script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+    <title>প্রো গেমিং জোন - কেশবপুর প্রতিদিন</title>
     <style>
         :root { --neon: #01ff95; --bg: #0b0f19; }
-        body { background: var(--bg); color: #fff; font-family: 'Hind Siliguri', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        body { background: var(--bg); color: #fff; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
         
-        .dashboard { display: flex; gap: 15px; margin-bottom: 20px; }
-        .stat-card { background: rgba(255,255,255,0.05); padding: 10px 15px; border-radius: 10px; border: 1px solid var(--neon); }
-        .stat-card span { font-family: 'Orbitron', sans-serif; color: var(--neon); font-size: 18px; }
+        /* মেইন স্লট বক্স */
+        .slot-container { width: 350px; border: 2px solid var(--neon); padding: 20px; border-radius: 20px; background: rgba(0,0,0,0.8); box-shadow: 0 0 20px rgba(1, 255, 149, 0.3); text-align: center; }
+        
+        /* স্কোর বোর্ড */
+        .board { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .score { border: 1px solid var(--neon); padding: 5px 10px; border-radius: 8px; font-size: 14px; }
 
-        .wheel-container { position: relative; width: 280px; height: 280px; padding: 10px; border-radius: 50%; border: 5px solid #1a1e29; box-shadow: 0 0 20px rgba(1, 255, 149, 0.2); }
-        #wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1); }
-        .pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #ff0055; z-index: 20; }
+        /* স্লট হুইল */
+        .wheel { width: 200px; height: 200px; border-radius: 50%; border: 6px solid #333; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: var(--neon); background: #000; box-shadow: inset 0 0 30px #000; transition: transform 4s ease-out; }
 
-        .spin-btn { margin-top: 30px; padding: 12px 40px; font-size: 18px; font-weight: bold; color: #000; background: var(--neon); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 0 15px var(--neon); transition: 0.3s; }
-        .spin-btn:disabled { background: #444; box-shadow: none; }
-
-        .ad-banner { margin-top: 40px; text-align: center; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 10px; border: 1px dashed #333; }
+        /* বাটন ও অ্যাড */
+        .spin-btn { width: 100%; padding: 15px; background: var(--neon); border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .ad-box { margin-top: 20px; min-height: 250px; background: #111; border: 1px dashed #444; }
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
-        <div class="stat-card">ব্যালেন্স: <span id="balance">৫০০</span> ৳</div>
-        <div class="stat-card">পয়েন্ট: <span id="points">০</span></div>
+<div class="slot-container">
+    <h2 style="color: var(--neon);">⚡ PRO GAMING ZONE</h2>
+    <div class="board">
+        <div class="score">ক্রেডিট: <span id="bal">500</span></div>
+        <div class="score">উইন: <span id="win">0</span></div>
     </div>
 
-    <div class="wheel-container">
-        <div class="pointer"></div>
-        <img id="wheel" src="https://i.ibb.co/L5M2k8s/neon-wheel.png" alt="Wheel">
-    </div>
+    <div class="wheel" id="wheel">00</div>
 
-    <button class="spin-btn" id="spinTrigger" onclick="startSpin()">স্পিন করুন</button>
-
-    <div class="ad-banner">
-        <p style="font-size: 10px; color: #555; margin-bottom: 10px;">SPONSORED ADVERTISEMENT</p>
-        
+    <div class="ad-box">
         <script type="text/javascript">
-          atOptions = {
-            'key' : '62a2c41178da94703bfa73a15df0c25c',
-            'format' : 'iframe',
-            'height' : 250,
-            'width' : 300,
-            'params' : {}
-          };
+          atOptions = { 'key' : '62a2c41178da94703bfa73a15df0c25c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
         </script>
         <script src="https://www.highperformanceformat.com/62a2c41178da94703bfa73a15df0c25c/invoke.js"></script>
     </div>
 
-    <script>
-        let balance = 500;
-        let points = 0;
-        let currentRotation = 0;
-        const wheel = document.getElementById('wheel');
-        const btn = document.getElementById('spinTrigger');
+    <button class="spin-btn" onclick="spin()">স্পিন করুন</button>
+</div>
 
-        function startSpin() {
-            if (balance < 50) {
-                alert("আপনার ব্যালেন্স শেষ! নতুন ব্যালেন্স পেতে কিছুক্ষণ পর আবার চেষ্টা করুন বা বিজ্ঞাপনে নজর দিন।");
-                return;
-            }
-            balance -= 50;
-            document.getElementById('balance').innerText = balance;
-            btn.disabled = true;
-            
-            const extraDegree = Math.floor(Math.random() * 360) + 2880; 
-            currentRotation += extraDegree;
-            wheel.style.transform = `rotate(${currentRotation}deg)`;
+<script>
+    function spin() {
+        let wheel = document.getElementById('wheel');
+        let val = Math.floor(Math.random() * 99);
+        wheel.style.transform = "rotate(3600deg)";
+        setTimeout(() => {
+            wheel.innerText = val < 10 ? "0" + val : val;
+            wheel.style.transform = "rotate(0deg)";
+            document.getElementById('win').innerText = val;
+        }, 4000);
+    }
+</script>
 
-            setTimeout(() => {
-                btn.disabled = false;
-                const winPoints = Math.floor(Math.random() * 50) + 5;
-                points += winPoints;
-                document.getElementById('points').innerText = points;
-                alert("অভিনন্দন! আপনি " + winPoints + " বোনাস পয়েন্ট পেয়েছেন।");
-            }, 4100);
-        }
-    </script>
+<script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
+
 </body>
 </html>
