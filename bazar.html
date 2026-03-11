@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অনলাইন বাজার | নিঝুম ট্রেডার্স</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent: #00d2ff;
+            --bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body { background-color: var(--bg); color: #fff; font-family: 'Hind Siliguri', sans-serif; margin: 0; }
+
+        /* হেডার ও হোম বাটন */
+        .hero { padding: 50px 20px; text-align: center; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); position: relative; }
+        .home-btn-container { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
+        .home-btn { display: inline-block; color: var(--accent); text-decoration: none; font-weight: bold; border: 1px solid var(--accent); padding: 10px 25px; border-radius: 50px; transition: 0.3s; }
+        .home-btn:hover { background: var(--accent); color: #000; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+
+        /* গ্লাস মরফিজম কার্ড */
+        .product-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 20px; text-align: center; transition: 0.3s; }
+        .product-card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2); }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
+        .price-tag { font-size: 1.5rem; color: var(--accent); font-weight: bold; margin: 10px 0; display: block; }
+        .btn-buy { display: block; background: var(--accent); color: #000; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .btn-buy:hover { filter: brightness(1.2); }
+
+        /* পেমেন্ট সেকশন এনিমেটেড */
+        .payment-box { text-align: center; margin-top: 50px; padding: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .payment-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 30px; background: linear-gradient(90deg, #00d2ff, #ff007f, #00d2ff); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: animate-text 5s linear infinite; }
+        @keyframes animate-text { 0% { background-position: 0%; } 100% { background-position: 200%; } }
+        
+        .pay-links { display: flex; justify-content: center; gap: 20px; }
+        .pay-btn { padding: 12px 30px; border-radius: 50px; color: #fff; text-decoration: none; font-weight: bold; transition: all 0.3s ease; }
+        .pay-btn:hover { transform: translateY(-5px); filter: brightness(1.3); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        /* বাটনগুলোর লেআউট ঠিক করার জন্য এই অংশটি ব্যবহার করুন */
+.action-btns { 
+    display: flex; 
+    gap: 8px; 
+    margin-top: 15px; 
+}
+
+.btn { 
+    flex: 1; 
+    padding: 10px 5px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 5px; 
+    transition: 0.3s; 
+}
+
+.btn-buy { background: #06b6d4; color: white; } /* আপনার ছবির মতো কালার */
+.btn-wa { background: #25d366; color: white; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <a href="index.html" class="home-btn"><i class="fas fa-home"></i> হোম পেজে ফিরে যান</a>
+        <h1>🛍️ আমাদের প্রিমিয়াম বাজার</h1>
+    </section>
+
+    <div class="container">
+        <div class="product-grid" id="market-grid"></div>
+    </div>
+
+    <div class="payment-box">
+        <h3 class="payment-title">আমাদের সাথে পেমেন্ট করুন নিরাপদে</h3>
+        <div class="pay-links">
+            <a href="https://bkash.com" target="_blank" style="background: #e91e63;" class="pay-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BKash_Logo.svg/200px-BKash_Logo.svg.png" alt="বিকাশ" style="width:25px; vertical-align:middle; margin-right:8px;"> বিকাশ
+            </a>
+            <a href="https://nagad.com.bd" target="_blank" style="background: #f44336;" class="pay-btn">
+                <img src="https://www.logo.wine/logo/Nagad/Nagad-Logo.wine.png" alt="নগদ" style="width:25px; vertical-align:middle; margin-right:8px;"> নগদ
+            </a>
+            <a href="https://www.visa.com" target="_blank" style="background: #1a1f71;" class="pay-btn">
+                <i class="fab fa-cc-visa" style="font-size: 20px; margin-right: 8px;"></i> কার্ড পেমেন্ট
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const products = Array.from({length: 20}, (_, i) => ({
+            name: `প্রিমিয়াম পণ্য ${i+1}`, 
+            price: (i+1) * 200 + 300
+        }));
+        const grid = document.getElementById('market-grid');
+        products.forEach((p, i) => {
+            grid.innerHTML += `
+                <div class="product-card">
+                    <img src="${i+1}.jpg" onerror="this.src='https://via.placeholder.com/300x200?text=Product'" alt="product">
+                    <h3>${p.name}</h3>
+                    <span class="price-tag">৳${p.price}</span>
+                    <div class="action-btns">
+                        <a href="https://wa.me/01729141489" class="btn btn-wa">
+                            <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ
+                        </a>
+                        <a href="javascript:void(0)" onclick="openPayment('${p.price}')" class="btn btn-buy">
+    <i class="fas fa-shopping-cart"></i> অর্ডার
+</a>
+                    </div>
+                </div>
+            `;
+        });
+        function openPayment(price) {
+        // এখানে আপনি আপনার পেমেন্ট গেটওয়ের লিঙ্ক বা পপআপ কোড দেবেন
+        alert("আপনি " + price + " টাকা পরিশোধের জন্য পেমেন্ট গেটওয়েতে যাচ্ছেন!");
+        
+        // উদাহরণ: সরাসরি কোনো পেমেন্ট লিঙ্কে পাঠাতে চাইলে:
+        // window.location.href = "https://checkout.yourpaymentgateway.com";
+        
+        // অথবা কোনো নির্দিষ্ট নাম্বারে হোয়াটসঅ্যাপ বা অন্য মাধ্যমে পেমেন্ট কনফার্ম করতে:
+        window.open("https://wa.me/01729141489?text=আমি " + price + " টাকার পণ্যটি অর্ডার করতে চাই।", "_blank");
+    }
+    </script>
+
+    <script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
+</body>
+</html>
