@@ -30,7 +30,7 @@
         src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
     </script>
     <meta name="google-site-verification" content="07Yms8xfsyspiCsneQ6h0Ez1Zt2a1r5tfDn4bwl_4sg" />
-    <script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
+    <script src="https://pl28896063.effectivegatecpm.com/31/a3/0c/31a30cec34e757d7521a470611d967e2.js"></script>
 </head>
 <body>
     <!-- <amp-auto-ads type="adsense"
@@ -78,11 +78,11 @@
             <li><a href="#">চাকরি</a></li>
             <li><a href="#">জীবনযাপন</a></li>
             <li><a href="#">ভিডিও</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="game.html" style="color: #ff01ff; font-weight: bold; border: 1px solid #01ff95; padding: 5px 10px; border-radius: 5px; margin-left: 10px;">
-                <i class="fas fa-gamepad"></i> লাকি গেম
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="game.html" target="_blank" style="color: #ff01ff; font-weight: bold; border: 1px solid #01ff95; padding: 5px 10px; border-radius: 5px; margin-left: 10px;">
+                <i class="fas fa-gamepad"></i> ভাগ্য পরীক্ষা
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
 
@@ -302,63 +302,82 @@
     </aside>
     <div class="main-content-column" style="flex: 2; min-width: 350px;">
         <style>
-    .bazar-container {
-        position: relative;
-        background: linear-gradient(135deg, #ff0080, #7928ca, #007cf0);
-        padding: 3px; /* বর্ডারের জন্য */
-        border-radius: 20px;
-        margin: 30px 0;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
+    .poster-container {
+    position: relative;
+    padding: 3px;
+    border-radius: 20px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1; /* এটি যোগ করুন */
+    cursor: pointer;
+}
+.poster-container:hover {
+    transform: translateY(-10px); /* মাউস নিলে পোস্টার সামান্য উপরে উঠবে */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* শ্যাডো বাড়বে */
+}
 
-    .bazar-content {
-        background: #0f172a;
-        padding: 30px;
-        border-radius: 18px;
-        text-align: center;
-        color: #fff;
-        position: relative;
-    }
+/* বাজারের জন্য বর্ডার কালার */
+.bazar-theme { background: linear-gradient(135deg, #01ff95, #00d2ff); }
+/* গেমের জন্য বর্ডার কালার */
+.game-theme { background: linear-gradient(135deg, #ff0080, #7928ca); }
 
-    /* পণ্যের স্টিকার স্টাইল */
-    .product-sticker {
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        border: 4px solid #fff;
-        border-radius: 15px;
-        transform: rotate(-10deg);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    }
-    .sticker-left { top: 20px; left: 20px; }
-    .sticker-right { top: 20px; right: 20px; transform: rotate(10deg); }
+.poster-content {
+    background: #0f172a;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    color: #fff;
+}
 
-    .bazar-content h2 { margin: 0; font-size: 28px; background: linear-gradient(to right, #fff, #ccc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    
-    .bazar-btn {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 35px;
-        background: #00d2ff;
-        color: #000;
-        font-weight: bold;
-        border-radius: 50px;
-        text-decoration: none;
-        transition: 0.3s;
-    }
-    .bazar-btn:hover { background: #fff; transform: scale(1.05); }
+.product-sticker {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 4px solid #fff;
+    border-radius: 15px;
+    transform: rotate(-10deg);
+    pointer-events: none; /* এটি অত্যন্ত জরুরি */
+}
+.sticker-left { top: 20px; left: 20px; }
+.sticker-right { top: 20px; right: 20px; transform: rotate(10deg); }
 
-    @media (max-width: 600px) { .product-sticker { display: none; } }
+.poster-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 35px;
+    color: #000;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+.poster-btn:hover {
+    transform: scale(1.05); /* মাউস নিলে বাটন সামান্য বড় হবে */
+    background: #fff;       /* সাদা ব্যাকগ্রাউন্ড */
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3); /* উজ্জ্বল শ্যাডো */
+}
+.bazar-theme .poster-btn { background: #01ff95; }
+.game-theme .poster-btn { background: #ff01ff; color: #fff; }
 </style>
-
-<div class="bazar-container">
-    <div class="bazar-content">
-        <img src="1.jpg" class="product-sticker sticker-left" alt="product">
-        <img src="2.jpg" class="product-sticker sticker-right" alt="product">
-
+<div class="poster-container bazar-theme">
+    <div class="poster-content">
+        <img src="1.jpg" class="product-sticker sticker-left" alt="Product">
+        <img src="2.jpg" class="product-sticker sticker-right" alt="Product">
         <h2>কেশবপুর প্রতিদিন অনলাইন বাজার</h2>
         <p>সেরা দামে সেরা পণ্যগুলো খুঁজে নিন এখান থেকেই!</p>
-        <a href="bazar.html" class="bazar-btn"><i class="fas fa-shopping-cart"></i> এখনই কেনাকাটা করুন</a>
+        <a href="bazar.html" class="poster-btn" target="_blank">এখনই কেনাকাটা করুন</a>
+    </div>
+</div>
+
+<div class="poster-container game-theme">
+    <div class="poster-content">
+        <img src="3.jpg" class="product-sticker sticker-left" alt="Game">
+        <img src="4.jpg" class="product-sticker sticker-right" alt="Game">
+        <h2>ভাগ্য পরীক্ষা!</h2>
+        <p>এখনই খেলুন এবং জিতে নিন দারুণ সব পুরস্কার!</p>
+        <a href="game.html" class="poster-btn" target="_blank">খেলুন!</a>
     </div>
 </div>
         <div style="margin: 40px 0 30px; text-align: center;">
@@ -762,6 +781,6 @@
     }
   });
 </script>
-<script type="text/javascript" src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
+<script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
 </body>
 </html>
