@@ -360,6 +360,60 @@
 }
 .bazar-theme .poster-btn { background: #01ff95; }
 .game-theme .poster-btn { background: #ff01ff; color: #fff; }
+
+    .gaming-video-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 280px;
+        background: #000;
+        border: 2px solid #ff0080;
+        border-radius: 15px;
+        overflow: hidden;
+        z-index: 99999; /* যেন সবকিছুর ওপর থাকে */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    /* স্বচ্ছ লেয়ার যা ক্লিক ক্যাচ করবে */
+    .overlay-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10; /* ভিডিওর ওপরে থাকবে */
+        cursor: pointer;
+    }
+
+    .video-container {
+        position: relative;
+        padding-top: 56.25%; /* 16:9 রেশিও */
+        pointer-events: none; /* ভিডিওর প্লে বাটনে ক্লিক করা যাবে না */
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .widget-footer {
+        background: linear-gradient(90deg, #ff0080, #7928ca);
+        color: white;
+        text-align: center;
+        padding: 8px;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* মোবাইলের জন্য সাইজ অ্যাডজাস্টমেন্ট */
+    @media (max-width: 600px) {
+        .gaming-video-widget { width: 180px; bottom: 10px; right: 10px; }
+        .widget-footer { font-size: 10px; padding: 5px; }
+    }
 </style>
 <div class="poster-container bazar-theme">
     <div class="poster-content">
@@ -782,5 +836,22 @@
   });
 </script>
 <script src="https://pl28890035.effectivegatecpm.com/34/77/18/3477182b5bd3e03d34321fc5128737e6.js"></script>
+<div class="gaming-video-widget">
+    <a href="https://www.effectivegatecpm.com/i7mupewb?key=303ad8e13eedc149c436adea4e19984e" 
+       target="_blank" 
+       class="overlay-link"></a>
+
+    <div class="video-container">
+        <iframe 
+            src="HD Clips.mp4" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media">
+        </iframe>
+    </div>
+    
+    <div class="widget-footer">
+        🔥 লাইভ গেমিং ভিডিও
+    </div>
+</div>
 </body>
 </html>
