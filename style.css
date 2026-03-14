@@ -752,7 +752,7 @@ form button:active {
 }
 /* নেভিগেশন বারের উচ্চতা কিছুটা বাড়ানো হয়েছে */
 .navbar {
-    padding-left: 15px !important; /* বাম পাশের গ্যাপ মাত্র ৫ পিক্সেল */
+    padding-left: 10px !important; /* বাম পাশের গ্যাপ মাত্র ৫ পিক্সেল */
     padding-right: 20px; /* ডানপাশে ভারসাম্য রাখার জন্য কিছুটা গ্যাপ */
     left: 5%; /* যদি পুরো নেভিগেশন বার স্ক্রিনের মার্জিন থেকে সরাতে চান */
     right: 5%;
@@ -2389,7 +2389,7 @@ h3{
     /* background: rgba(17, 20, 32, 0.8); ফুটারের ডার্ক ব্যাকগ্রাউন্ড */
     border-bottom: 1px solid rgba(1, 255, 149, 0.3); /* নিওন গ্রিন বর্ডার */
     backdrop-filter: blur(10px); /* গ্লাস ইফেক্ট */
-    padding: 15px 30px;
+    /* padding: 15px 30px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3624,4 +3624,48 @@ header, nav, .navbar {
     margin-top: 80px; /* মেনুর উচ্চতার চেয়ে কিছুটা বেশি মার্জিন দিন */
     position: relative;
     z-index: 10;
+}
+.ad-container {
+    max-width: 100%;
+    overflow: hidden; /* বড় অ্যাড যেন লেআউট নষ্ট না করে */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .ad-container iframe {
+        max-width: 100%; /* মোবাইলে অ্যাডটি অটো ফিট হবে */
+        height: auto;
+    }
+}
+/* ভিডিও ফ্রেম ছোট করার জন্য */
+.floating-video {
+    width: 150px; /* আপনার ইচ্ছামতো মাপ দিতে পারেন */
+    height: auto; /* উচ্চতা অটোমেটিক অ্যাডজাস্ট হবে */
+    position: fixed; /* পেজের নির্দিষ্ট জায়গায় ধরে রাখার জন্য */
+    bottom: 20px; /* নিচ থেকে দূরত্ব */
+    right: 20px; /* ডান থেকে দূরত্ব */
+    border-radius: 10px; /* কোণাগুলো বাঁকানো করার জন্য */
+    overflow: hidden; /* ভিডিওর বাড়তি অংশ কেটে দেওয়ার জন্য */
+}
+/* এই ক্লাসটি দিয়ে আইফ্রেমকে ঘিরে দিন */
+.video-frame-small iframe {
+    width: 100px;  /* আপনার পছন্দমতো ছোট সাইজ */
+    height: 150px;
+    box-shadow: 0 0 15px rgba(1, 255, 149, 0.3); /* সুন্দর নিয়ন ইফেক্ট */
+}
+.gaming-video-widget {
+    position: relative; /* এটি খুবই জরুরি */
+    width: 300px;
+}
+
+.overlay-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%; /* ভিডিওর ওপরের অংশ ঢাকবে */
+    z-index: 10; /* ভিডিওর ওপরে রাখার জন্য */
+    cursor: pointer;
 }

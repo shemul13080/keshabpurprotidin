@@ -335,3 +335,11 @@ document.getElementById('prevMonth').onclick = () => { currentDate.setMonth(curr
 document.getElementById('nextMonth').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
 
 renderCalendar();
+// ভিডিও লোড হওয়ার সাথে সাথে প্লে করার জন্য
+document.addEventListener('DOMContentLoaded', function() {
+    var video = document.querySelector('.floating-video video');
+    if(video) {
+        video.muted = true; // মিউট নিশ্চিত করা
+        video.play();       // প্লে কমান্ড
+    }
+});
